@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <!--Bean para el formulario de inscripcion-->
+        <form-bean name="registroForm" type="web.forms.registroForm"/>
+        <form-bean name="dniForm" type="web.forms.dniForm"/>
+
+    </form-beans>
+
+    <global-exceptions>
+
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="welcome" path="verTitulaciones.do" redirect="true"/>
+        <forward name="registro_alumno" path="/registro_alumno.jsp"/>
+        <forward name="principal" path="/index.jsp"/>
+        <forward name="dni_alumno" path="/dni_alumno.jsp"/>
+    </global-forwards>
+
+    <action-mappings>
+
+        <action path="/listadoAsignaturas"
+                type="web.actions.listadoAsignatura">
+            <forward name="listado_index" path="/listado_alumnos.jsp"/>
+            <forward name="error_listado_index" path="/error_listado_index.jsp"/>
+        </action>
+
+        <action path="/verTitulaciones"
+                type="web.actions.verTitulaciones">
+            <forward name="titulaciones_index" path="/titulaciones_index.jsp"/>
+            <forward name="error_titulaciones_index" path="/error_titulaciones_index.jsp"/>
+        </action>
+        <!--Accion para registrar un alumno-->
+        <action path="/registroAlumno"
+                name="registroForm"
+                scope="request"
+                input="/registro_alumno.jsp"
+                type="web.actions.registroAlumno">
+            <forward name="alumno_inscrito" path="/alumno_inscrito.jsp"/>
+            <forward name="error_alumno_inscrito" path="/error_alumno_inscrito.jsp"/>
+        </action>
+
+        <!--Accion para ver las inscripciones de un alumno-->
+        <action path="/verInscripciones"
+                name="dniForm"
+                scope="request"
+                input="/dni_alumno.jsp"
+                type="web.actions.verInscripciones">
+            <forward name="inscripciones_index" path="/inscripciones_index.jsp"/>
+            <forward name="error_inscripciones_index" path="/error_inscripciones_index.jsp"/>
+        </action>
+
+        <action path="/correoConfirmacion"
+                scope="request"
+                type="web.actions.correoConfirmacion">
+        </action>
+
+        <action path="/opAsignaturas"
+                scope="request"
+                type="web.actions.opAsignaturas"
+                parameter="operacion">
+            <forward name="asignaturas_index" path="/asignaturas_index.jsp"/>
+            <forward name="error_asignaturas_index" path="/error_asignaturas_index.jsp"/>
+            <forward name="grupos_index" path="/grupos_index.jsp"/>
+            <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
+        </action>
+
+        <action path="/opListados"
+                scope="request"
+                type="web.actions.opListados"
+                parameter="operacion">
+            <forward name="asignaturasListado" path="/listadoasignaturas.jsp"/>
+            <forward name="listadoGrupos" path="/listado_grupos.jsp"/>
+            <forward name="listaGrupoIndividual" path="/listaGrupoIndividual.jsp"/>
+            <forward name="error_listado_index" path="/error_listado_index.jsp"/>
+            
+            <!--
+             <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
+             -->
+        </action>
+       
+        <action path="/listaGrupoIndividual"
+                scope="request"
+                input="/listaGrupoIndividual.jsp"
+                type="web.actions.opListados">
+                <forward name="" path="listaGrupoIndividual.jsp"/>
+        </action>
+
+
+    </action-mappings>
+
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>
+
+
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+
+</struts-config>
