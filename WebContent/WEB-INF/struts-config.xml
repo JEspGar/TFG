@@ -10,6 +10,7 @@
         <!--Bean para el formulario de inscripcion-->
         <form-bean name="registroForm" type="web.forms.registroForm"/>
         <form-bean name="dniForm" type="web.forms.dniForm"/>
+        <form-bean name="asignaturasForm" type="web.forms.asignaturasForm"/>
 
     </form-beans>
 
@@ -70,7 +71,19 @@
             <forward name="error_asignaturas_index" path="/error_asignaturas_index.jsp"/>
             <forward name="grupos_index" path="/grupos_index.jsp"/>
             <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
-        </action>
+        </action> 
+        
+        <!-- <action path="/opAsignaturas"
+        		name="asignaturasForm"
+                scope="request"
+                input="/contenido_titulaciones_index.jsp"
+                type="web.actions.opAsignaturas"
+                parameter="operacion">
+            <forward name="asignaturas_index" path="/asignaturas_index.jsp"/>
+            <forward name="error_asignaturas_index" path="/error_asignaturas_index.jsp"/>
+            <forward name="grupos_index" path="/grupos_index.jsp"/>
+            <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
+        </action> -->
 
         <action path="/opListados"
                 scope="request"
@@ -92,6 +105,26 @@
                 type="web.actions.opListados">
                 <forward name="" path="listaGrupoIndividual.jsp"/>
         </action>
+        
+        <!--Accion para registrar una asignatura-->
+         <action path="/altaAsignatura"
+                name="asignaturasForm"
+                parameter="method"
+                scope="request"
+                input="/alta_asignatura.jsp"
+                validate="false"
+                type="web.actions.altaAsignatura">
+            <forward name="asignatura_form" path="/alta_asignatura.jsp"/>
+            <forward name="error_creacion_asignatura" path="/error_creacion_asignatura.jsp"/>
+            <forward name="asignatura_insertada" path="/asignatura_creada.jsp"/>
+            <forward name="lista_titulaciones" path="/mantenimiento_asignatura.jsp"/>
+            <forward name="lista_asignaturas" path="/mantenimiento_asignatura_lista.jsp"/>
+            <forward name="mantenimiento_form" path="/modificacion_asignatura.jsp"/>
+            <forward name="asignatura_borrada" path="/asignatura_borrada.jsp"/>
+            <forward name="error_titulaciones_index" path="/error_titulaciones_index.jsp"/>
+        </action>
+        
+        
 
 
     </action-mappings>

@@ -185,6 +185,7 @@ input.button {
         background: #FFF url(../images/cabecera.jpg) no-repeat ;
         background-position:center;
         margin:0;
+        float: left;
 }
 #header-content {
 	position: relative;

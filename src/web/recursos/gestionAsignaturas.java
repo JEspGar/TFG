@@ -8,10 +8,13 @@ package web.recursos;
 import java.sql.*;
 import java.util.Vector;
 import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import web.data.asignatura;
 import web.data.titulacion;
+import web.forms.asignaturasForm;
+import web.forms.registroForm;
 import web.data.grupo;
 
 
@@ -335,7 +338,7 @@ public class gestionAsignaturas
             Connection conexion = this.bbdd.getConexion();
 
             //Se prepara la query
-            String query  = "SELECT * FROM labos.grupos ";
+            String query  = "SELECT * FROM grupos ";
                    query += "WHERE codigolab='"+codGrupo+"'";
 
             //Se ejecuta la query
@@ -447,6 +450,248 @@ public class gestionAsignaturas
         {
             System.out.println("Error al acceder a las asignaturas de la Base de Datos: "+e.getMessage());
             return null;
+        }
+    }
+    
+    public Vector listaAsignaturasTitulacion(String codigo_titulacion)
+    {
+        try
+        {            
+            //Se obtiene una conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Se prepara la query
+            String query =  "SELECT * FROM asignaturas ";
+                   query += "WHERE titulacion='"+codigo_titulacion+"'";
+
+            //Se crea un vector de asignaturas
+            Vector  vectorAsignaturas = new Vector();
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            //Para cada fila se creará un objeto y se rellenará
+            //con los valores de las columnas.
+            while(resultado.next())
+            {
+                asignatura asignatura = new asignatura();
+
+                asignatura.setCodigo(resultado.getString("codigo"));
+                asignatura.setTitulo(resultado.getString("titulo"));
+                asignatura.setFechaInicio(resultado.getDate("fechainicio"));
+                asignatura.setFechaFin(resultado.getDate("fechafin"));
+                asignatura.setResponsable(resultado.getString("responsable"));
+                asignatura.setEmail(resultado.getString("email"));
+                asignatura.setTelefono(resultado.getString("telefono"));
+
+                //Se añade la asignatura al vector de asignaturas
+                vectorAsignaturas.add(asignatura);
+            }
+
+            //Se cierra la conexión
+            this.bbdd.cerrarConexion(conexion);
+
+            return vectorAsignaturas;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al acceder a las asignaturas de la Base de Datos: "+e.getMessage());
+            return null;
+        }
+    }
+    
+    public asignatura datosAsignatura(String codigo)
+    {
+        try
+        {
+            //Se obtiene una conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Se prepara la query
+            String query  = "SELECT * FROM asignaturas ";
+                   query += "WHERE codigo='"+codigo+"'";
+
+            //Se crea una instancia de asignatura
+            asignatura asignatura = new asignatura();
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            //Para cada fila se creará un objeto y se rellenará
+            //con los valores de las columnas.
+            if(resultado.next())
+            {
+                asignatura.setCodigo(resultado.getString("codigo"));
+                asignatura.setTitulo(resultado.getString("titulo"));
+                asignatura.setFechaInicio(resultado.getDate("fechainicio"));
+                asignatura.setFechaFin(resultado.getDate("fechafin"));
+                asignatura.setResponsable(resultado.getString("responsable"));
+                asignatura.setEmail(resultado.getString("email"));
+                asignatura.setTelefono(resultado.getString("telefono"));
+            }
+
+            //Se cierra la conexión
+            this.bbdd.cerrarConexion(conexion);
+
+            return asignatura;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al acceder a la titulacion en la Base de Datos: "+e.getMessage());
+            return null;
+        }
+    } 
+    
+    public asignatura comprobarAsignatura(String codigo, String titulo, String titulacion)
+    {
+        try
+        {
+            //Se obtiene una conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Se prepara la query
+            String query  = "SELECT * FROM asignaturas ";
+                   query += "WHERE (codigo='"+codigo+"' ";
+                   query += "OR titulo = '"+titulo+"') ";
+                   query += "AND titulacion='"+titulacion+"'";
+
+            //Se crea una instancia de asignatura
+            asignatura asignatura = new asignatura();
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            //Para cada fila se creará un objeto y se rellenará
+            //con los valores de las columnas.
+            if(resultado.next())
+            {
+                asignatura.setCodigo(resultado.getString("codigo"));
+                asignatura.setTitulo(resultado.getString("titulo"));
+                asignatura.setFechaInicio(resultado.getDate("fechainicio"));
+                asignatura.setFechaFin(resultado.getDate("fechafin"));
+                asignatura.setResponsable(resultado.getString("responsable"));
+                asignatura.setEmail(resultado.getString("email"));
+                asignatura.setTelefono(resultado.getString("telefono"));
+            }
+
+            //Se cierra la conexión
+            this.bbdd.cerrarConexion(conexion);
+
+            return asignatura;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al acceder a la asignatura en la Base de Datos: "+e.getMessage());
+            return null;
+        }
+    }
+    
+    public boolean registrarAsignatura (asignaturasForm formulario)
+    {
+    	boolean valido = false;
+    	try{	
+	        SimpleDateFormat formato1 = new SimpleDateFormat("dd/MM/yyyy");
+	        Date fechaInicio = formato1.parse(formulario.getFechaInicio());
+	        Date fechaFin = formato1.parse(formulario.getFechaFin());
+	        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+	        //Preparamos la query
+	        String query  = "INSERT INTO asignaturas ";
+	               query += "(codigo,titulo,fechainicio,fechafin,responsable,email,telefono,titulacion) ";
+	
+	               query += "VALUES ('"+formulario.getCodigo()+"','"+formulario.getTitulo().toLowerCase()+"','"+
+	            		   formato.format(fechaInicio)+"','"+formato.format(fechaFin)+"','"+formulario.getResponsable().toLowerCase()+"','"+
+	                        formulario.getEmail().toLowerCase()+"','"+formulario.getTelefono()+"','"+formulario.getTitulacion()+"')";
+
+        
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException | ParseException e)
+        {
+            System.out.println("Error al inscribir al alumno en la Base de Datos: "+e.getMessage());
+            return valido;
+        }
+    }
+    
+    public boolean modificarAsignatura (asignaturasForm formulario)
+    {
+    	 boolean valido = false;
+    	try
+        {
+    		SimpleDateFormat formato1 = new SimpleDateFormat("dd/MM/yyyy");
+	        Date fechaInicio = formato1.parse(formulario.getFechaInicio());
+	        Date fechaFin = formato1.parse(formulario.getFechaFin());
+	        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+	        //Preparamos la query
+	        String query  = "UPDATE asignaturas ";
+	               query += "SET titulo= '"+formulario.getTitulo().toLowerCase()+"', ";
+	               query += "fechainicio = '"+formato.format(fechaInicio)+"', fechafin = '"+formato.format(fechaFin)+"', ";
+	               query += "responsable = '"+formulario.getResponsable().toLowerCase()+"', email = '"+formulario.getEmail().toLowerCase()+"', ";
+	               query += "telefono = '"+formulario.getTelefono()+"' WHERE codigo = '"+formulario.getCodigo()+"'";
+
+        
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException | ParseException e)
+        {
+            System.out.println("Error al actualizar la asignatura: "+e.getMessage());
+            return valido;
+        }
+    }
+    
+    public boolean borrarAsignatura(String codAsignatura)
+    {
+        boolean valido = false;
+
+        //Se prepara la query
+        String query  = "DELETE FROM asignaturas ";
+               query += "WHERE codigo='"+codAsignatura+"'";
+
+        try
+        {
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al borrar la asignatura de la base de datos: "+e.getMessage());
+            return valido;
         }
     }
 }

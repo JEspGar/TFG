@@ -8,7 +8,15 @@ package web.actions;
 import javax.servlet.http.*;
 import org.apache.struts.action.*;
 import org.apache.struts.actions.*;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import sun.util.calendar.LocalGregorianCalendar.Date;
+
 import java.util.Vector;
+
+import web.data.asignatura;
 import web.recursos.*;
 
 
@@ -54,7 +62,16 @@ public class opAsignaturas extends DispatchAction
 
        //Recuperamos el vector de grupos
        gestionAsignaturas gAsignaturas = new gestionAsignaturas(driver,url,usuario,password);
-       Vector grupos = gAsignaturas.listaGrupos(request.getParameter("asignatura"));
+       
+       //Comprobamos que la asignatura este activa, si no lo esta no se devuelven valores de grupos
+       asignatura asignatura = gAsignaturas.datosAsignatura(request.getParameter("asignatura"));
+       Date fechaActual = new Date();
+       Vector grupos = null;
+       if(asignatura.getFechaInicio().before(fechaActual) && asignatura.getFechaFin().after(fechaActual)) {
+    	   grupos = gAsignaturas.listaGrupos(request.getParameter("asignatura"));
+       }else {
+    	   grupos = null;
+       }
        
        String nombre_asignatura = gAsignaturas.nombreAsociado(request.getParameter("asignatura"));
 

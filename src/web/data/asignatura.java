@@ -16,6 +16,7 @@ public class asignatura
     private String responsable;
     private String email;
     private String telefono;
+    private String titulacion;
 
     public String getCodigo() {
         return codigo;
@@ -72,5 +73,13 @@ public class asignatura
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+	public String getTitulacion() {
+		return titulacion;
+	}
+
+	public void setTitulacion(String titulacion) {
+		this.titulacion = titulacion;
+	}
 
 }
