@@ -22,13 +22,15 @@
         <html:errors property="asignatura.titulo.extenso"></html:errors>
         
 
-      <label>Fecha de Inicio</label>
+      <label>Fecha de Inicio (dd/mm/yyyy)</label>
       <html:text property="fechaInicio" size="29" ></html:text>
         <html:errors property="asignatura.fechaInicio.vacio"></html:errors>
+        <html:errors property="asignatura.fechaInicio.formato"></html:errors>
         
-      <label>Fecha de Fin</label>
+      <label>Fecha de Fin (dd/mm/yyyy)</label>
       <html:text property="fechaFin" size="29" ></html:text>
         <html:errors property="asignatura.fechaFin.vacio"></html:errors>
+        <html:errors property="asignatura.fechaFin.formato"></html:errors>
         
       <label>Responsable</label>
       <html:text property="responsable" size="29" ></html:text>

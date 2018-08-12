@@ -22,7 +22,7 @@ import web.forms.*;
 import web.data.*;
 
 
-public class altaAsignatura extends DispatchAction
+public class mantenimientoAsignatura extends DispatchAction
 {
     
     public ActionForward inicializar (ActionMapping mapping, ActionForm form,
@@ -262,7 +262,7 @@ public class altaAsignatura extends DispatchAction
 		if (errores.isEmpty()) {
   		   modificada = gAsignaturas.modificarAsignatura(formulario);
   		   if (modificada){
-  			   pantalla="asignatura_borrada";
+  			   pantalla="asignatura_modificada";
   		   }
 		}else {
 			//Se guardan los errores en la request

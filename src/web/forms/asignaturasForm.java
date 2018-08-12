@@ -155,11 +155,17 @@ public class asignaturasForm extends ActionForm
 	        {
 	            errores.add("asignatura.fechaInicio.vacio", new ActionMessage("error.fechaInicio"));
 	        }
+	        if(this.fechaInicio.length()!=10 || !this.fechaInicio.contains("/")) {
+	        	errores.add("asignatura.fechaInicio.formato", new ActionMessage("error.fechaInicio.formato"));
+	        }
 
 	        //Errores del campo fechaFin
 	        if(this.fechaFin==null || this.fechaFin.equals(""))
 	        {
 	            errores.add("asignatura.fechaFin.vacio", new ActionMessage("error.fechaFin"));
+	        }
+	        if(this.fechaFin.length()!=10 || !this.fechaFin.contains("/")) {
+	        	errores.add("asignatura.fechaFin.formato", new ActionMessage("error.fechaFin.formato"));
 	        }
 	        
 	        //Errores del campo responsable

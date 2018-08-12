@@ -1,6 +1,6 @@
 <%-- 
-    Document   : titulaciones_index
-    Created on : 16-sep-2009, 10:32:45
+    Document   : alumno_inscrito
+    Created on : 17-sep-2009, 11:13:16
     Author     : cc
 --%>
 
@@ -19,29 +19,23 @@
 <body>
 
     <!-- El contenedor de la cabecera empieza aqui -->
-    <div>
-    <div style="float:left;">
-	    <h3>
-	    <html:link forward="menu_administracion">Menu</html:link>
-	    </h3>
-    </div>
     <div id="header-wrap">
         <!-- El contenido de la cabecera empieza aqui -->
         <div id="header-content">
 
             <%@include file = "WEB-INF/cabecera_index.jsp" %>
-		
+
         </div>
-    </div>    
     </div>
-	
+
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
-			
-           <%@include file = "WEB-INF/contenido_titulaciones_index.jsp" %>
+
+           <%@include file = "WEB-INF/contenido_asignatura_modificada.jsp" %>
 
     </div>
 
 </body>
 
 </html:html>
+

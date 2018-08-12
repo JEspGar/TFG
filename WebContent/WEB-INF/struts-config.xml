@@ -11,6 +11,7 @@
         <form-bean name="registroForm" type="web.forms.registroForm"/>
         <form-bean name="dniForm" type="web.forms.dniForm"/>
         <form-bean name="asignaturasForm" type="web.forms.asignaturasForm"/>
+        <form-bean name="titulacionForm" type="web.forms.titulacionForm"/>
 
     </form-beans>
 
@@ -23,6 +24,8 @@
         <forward name="registro_alumno" path="/registro_alumno.jsp"/>
         <forward name="principal" path="/index.jsp"/>
         <forward name="dni_alumno" path="/dni_alumno.jsp"/>
+        <forward name="menu_administracion" path="/menu_index.jsp"/>
+        <forward name="titulacion_form" path="/alta_titulacion.jsp"/>
     </global-forwards>
 
     <action-mappings>
@@ -113,18 +116,34 @@
                 scope="request"
                 input="/alta_asignatura.jsp"
                 validate="false"
-                type="web.actions.altaAsignatura">
+                type="web.actions.mantenimientoAsignatura">
             <forward name="asignatura_form" path="/alta_asignatura.jsp"/>
+            <forward name="lista_titulaciones" path="/mantenimiento_asignatura_titulaciones.jsp"/>
+        	<forward name="lista_asignaturas" path="/mantenimiento_asignatura_asignaturas.jsp"/>
             <forward name="error_creacion_asignatura" path="/error_creacion_asignatura.jsp"/>
             <forward name="asignatura_insertada" path="/asignatura_creada.jsp"/>
-            <forward name="lista_titulaciones" path="/mantenimiento_asignatura.jsp"/>
-            <forward name="lista_asignaturas" path="/mantenimiento_asignatura_lista.jsp"/>
             <forward name="mantenimiento_form" path="/modificacion_asignatura.jsp"/>
             <forward name="asignatura_borrada" path="/asignatura_borrada.jsp"/>
+            <forward name="asignatura_modificada" path="/asignatura_modificada.jsp"/>
             <forward name="error_titulaciones_index" path="/error_titulaciones_index.jsp"/>
         </action>
         
-        
+        <!--Accion para registrar una titulacion-->
+         <action path="/mantenimientoTitulacion"
+                name="titulacionForm"
+                parameter="method"
+                scope="request"
+                input="/alta_titulacion.jsp"
+                validate="false"
+                type="web.actions.mantenimientoTitulacion">
+            <forward name="lista_titulaciones" path="/mantenimiento_titulacion_titulaciones.jsp"/>
+            <forward name="error_creacion_titulacion" path="/error_creacion_titulacion.jsp"/>
+            <forward name="titulacion_insertada" path="/titulacion_creada.jsp"/>
+            <forward name="mantenimiento_form" path="/modificacion_titulacion.jsp"/>
+            <forward name="titulacion_borrada" path="/titulacion_borrada.jsp"/>
+            <forward name="titulacion_modificada" path="/titulacion_modificada.jsp"/>
+            <forward name="error_titulaciones_index" path="/error_titulaciones_index.jsp"/>
+        </action>    
 
 
     </action-mappings>

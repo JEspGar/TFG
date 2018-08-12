@@ -20,11 +20,6 @@
 
     <!-- El contenedor de la cabecera empieza aqui -->
     <div>
-    <div style="float:left;">
-	    <h3>
-	    <html:link forward="menu_administracion">Menu</html:link>
-	    </h3>
-    </div>
     <div id="header-wrap">
         <!-- El contenido de la cabecera empieza aqui -->
         <div id="header-content">
@@ -38,7 +33,7 @@
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 			
-           <%@include file = "WEB-INF/contenido_titulaciones_index.jsp" %>
+           <%@include file = "WEB-INF/contenido_menu_administracion.jsp" %>
 
     </div>
 

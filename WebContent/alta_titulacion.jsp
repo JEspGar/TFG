@@ -1,6 +1,6 @@
 <%-- 
-    Document   : titulaciones_index
-    Created on : 16-sep-2009, 10:32:45
+    Document   : registro_alumno
+    Created on : 17-sep-2009, 10:34:17
     Author     : cc
 --%>
 
@@ -12,33 +12,33 @@
 
 <html:html>
 <head>
-    <title>Inscripcion Laboratorios</title>
+    <title>Alta de Titulaciones</title>
     <link rel="stylesheet" type="text/css" href="inc/estilos.css">
+    <script type="text/javascript">
+function submitForm()
+{
+document.forms[0].action = "mantenimientoTitulacion.do?method=crear"
+document.forms[0].submit();
+}
+</script>
 </head>
 
 <body>
 
     <!-- El contenedor de la cabecera empieza aqui -->
-    <div>
-    <div style="float:left;">
-	    <h3>
-	    <html:link forward="menu_administracion">Menu</html:link>
-	    </h3>
-    </div>
     <div id="header-wrap">
         <!-- El contenido de la cabecera empieza aqui -->
         <div id="header-content">
 
             <%@include file = "WEB-INF/cabecera_index.jsp" %>
-		
+
         </div>
-    </div>    
     </div>
-	
+
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
-			
-           <%@include file = "WEB-INF/contenido_titulaciones_index.jsp" %>
+
+           <%@include file = "WEB-INF/contenido_alta_titulacion.jsp" %>
 
     </div>
 
