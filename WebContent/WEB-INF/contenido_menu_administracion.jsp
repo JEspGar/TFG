@@ -41,10 +41,16 @@
            </h3>
        </td>    
    </tr>
+   <tr>
+       <td>
+           <h3><html:link action="/listadoAsignaturas.do">Consultar Listados</html:link>
+           </h3>
+       </td>    
+   </tr>
 </table>
 
 </center>
 <br/>
-<h3><html:link action="/verTitulaciones.do">Salir</html:link></h3>
+<h3><html:link action="/logoff.do">Salir</html:link></h3>
 
 
