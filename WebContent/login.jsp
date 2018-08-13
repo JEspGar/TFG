@@ -27,7 +27,7 @@
 			    <html:text property="username" size="29"></html:text>
 			
 			    <label>Password</label>
-			    <html:text property="password" size="29" ></html:text>
+			    <html:password property="password" size="29" ></html:password>
 			       		
 				<p><html:submit><bean:message key='web.login.button.submit' /></html:submit></p>
 			</html:form>

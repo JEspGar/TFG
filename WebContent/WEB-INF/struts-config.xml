@@ -48,6 +48,7 @@
                 type="web.actions.listadoAsignatura">
             <forward name="listado_index" path="/listado_alumnos.jsp"/>
             <forward name="error_listado_index" path="/error_listado_index.jsp"/>
+            <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
         </action>
 
         <action path="/verTitulaciones"
@@ -98,6 +99,7 @@
             <forward name="listadoGrupos" path="/listado_grupos.jsp"/>
             <forward name="listaGrupoIndividual" path="/listaGrupoIndividual.jsp"/>
             <forward name="error_listado_index" path="/error_listado_index.jsp"/>
+            <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
             
             <!--
              <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
