@@ -89,18 +89,6 @@
             <forward name="grupos_index" path="/grupos_index.jsp"/>
             <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
         </action> 
-        
-        <!-- <action path="/opAsignaturas"
-        		name="asignaturasForm"
-                scope="request"
-                input="/contenido_titulaciones_index.jsp"
-                type="web.actions.opAsignaturas"
-                parameter="operacion">
-            <forward name="asignaturas_index" path="/asignaturas_index.jsp"/>
-            <forward name="error_asignaturas_index" path="/error_asignaturas_index.jsp"/>
-            <forward name="grupos_index" path="/grupos_index.jsp"/>
-            <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
-        </action> -->
 
         <action path="/opListados"
                 scope="request"
