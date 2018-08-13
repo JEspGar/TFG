@@ -1,6 +1,6 @@
 <%-- 
-    Document   : alumno_inscrito
-    Created on : 17-sep-2009, 11:13:16
+    Document   : registro_alumno
+    Created on : 17-sep-2009, 10:34:17
     Author     : cc
 --%>
 
@@ -12,8 +12,15 @@
 
 <html:html>
 <head>
-    <title>Inscripcion Laboratorios</title>
-    <link rel="stylesheet" type="text/css" href="inc/estilos.css">
+    <title>Mantenimiento de Asignaturas</title>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/inc/estilos.css">
+    <script type="text/javascript">
+function submitForm()
+{
+document.forms[0].action = "altaAsignatura.do?method=buscarTitulacion"
+document.forms[0].submit();
+}
+</script>
 </head>
 
 <body>
@@ -23,7 +30,7 @@
         <!-- El contenido de la cabecera empieza aqui -->
         <div id="header-content">
 
-            <%@include file = "WEB-INF/cabecera_index.jsp" %>
+            <%@include file = "/WEB-INF/cabecera_index.jsp" %>
 
         </div>
     </div>
@@ -31,11 +38,10 @@
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "WEB-INF/contenido_titulacion_creada.jsp" %>
+           <%@include file = "/WEB-INF/contenido_lista_titulaciones.jsp" %>
 
     </div>
 
 </body>
 
 </html:html>
-

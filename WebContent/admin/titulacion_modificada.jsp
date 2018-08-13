@@ -1,6 +1,6 @@
 <%-- 
-    Document   : error_alumno_inscrito
-    Created on : 21-sep-2009, 10:45:48
+    Document   : alumno_inscrito
+    Created on : 17-sep-2009, 11:13:16
     Author     : cc
 --%>
 
@@ -13,7 +13,7 @@
 <html:html>
 <head>
     <title>Inscripcion Laboratorios</title>
-    <link rel="stylesheet" type="text/css" href="inc/estilos.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/inc/estilos.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
         <!-- El contenido de la cabecera empieza aqui -->
         <div id="header-content">
 
-            <%@include file = "WEB-INF/cabecera_index.jsp" %>
+            <%@include file = "/WEB-INF/cabecera_index.jsp" %>
 
         </div>
     </div>
@@ -31,10 +31,11 @@
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "WEB-INF/contenido_error_creacion_asignatura.jsp" %>
+           <%@include file = "/WEB-INF/contenido_titulacion_modificada.jsp" %>
 
     </div>
 
 </body>
 
 </html:html>
+

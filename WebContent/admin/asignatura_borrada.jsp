@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registro_alumno
-    Created on : 17-sep-2009, 10:34:17
+    Document   : alumno_inscrito
+    Created on : 17-sep-2009, 11:13:16
     Author     : cc
 --%>
 
@@ -12,15 +12,8 @@
 
 <html:html>
 <head>
-    <title>Alta de Titulaciones</title>
-    <link rel="stylesheet" type="text/css" href="inc/estilos.css">
-    <script type="text/javascript">
-function submitForm()
-{
-document.forms[0].action = "mantenimientoTitulacion.do?method=crear"
-document.forms[0].submit();
-}
-</script>
+    <title>Inscripcion Laboratorios</title>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/inc/estilos.css">
 </head>
 
 <body>
@@ -30,7 +23,7 @@ document.forms[0].submit();
         <!-- El contenido de la cabecera empieza aqui -->
         <div id="header-content">
 
-            <%@include file = "WEB-INF/cabecera_index.jsp" %>
+            <%@include file = "/WEB-INF/cabecera_index.jsp" %>
 
         </div>
     </div>
@@ -38,10 +31,11 @@ document.forms[0].submit();
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "WEB-INF/contenido_alta_titulacion.jsp" %>
+           <%@include file = "/WEB-INF/contenido_asignatura_borrada.jsp" %>
 
     </div>
 
 </body>
 
 </html:html>
+

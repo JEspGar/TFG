@@ -25,5 +25,6 @@
 
       <br />
       <html:submit property="method" value="Crear" styleClass="button" onclick="submitForm()" />
+      <html:button property="method" styleClass="button" onclick="volver()">Volver</html:button>
 
 </html:form>

@@ -47,5 +47,6 @@
       <br />
       <html:submit property="method" value="Modificar" styleClass="button" onclick="submitForm()" />
       <html:submit property="method" value="Borrar" styleClass="button" onclick="submitFormBorrado()" />
+      <html:button property="method" styleClass="button" onclick="volver()">Volver</html:button>
 
 </html:form>

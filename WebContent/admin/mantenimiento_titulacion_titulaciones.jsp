@@ -12,17 +12,12 @@
 
 <html:html>
 <head>
-    <title>Modificacion de Asignaturas</title>
-    <link rel="stylesheet" type="text/css" href="inc/estilos.css">
+    <title>Mantenimiento de Titulaciones</title>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/inc/estilos.css">
     <script type="text/javascript">
 function submitForm()
 {
-document.forms[0].action = "altaAsignatura.do?method=modificarAsignatura"
-document.forms[0].submit();
-}
-function submitFormBorrado()
-{
-document.forms[0].action = "altaAsignatura.do?method=borrarAsignatura"
+document.forms[0].action = "mantenimientoTitulacion.do?method=buscarTitulacion"
 document.forms[0].submit();
 }
 </script>
@@ -35,7 +30,7 @@ document.forms[0].submit();
         <!-- El contenido de la cabecera empieza aqui -->
         <div id="header-content">
 
-            <%@include file = "WEB-INF/cabecera_index.jsp" %>
+            <%@include file = "/WEB-INF/cabecera_index.jsp" %>
 
         </div>
     </div>
@@ -43,7 +38,7 @@ document.forms[0].submit();
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "WEB-INF/contenido_modificacion_asignatura.jsp" %>
+           <%@include file = "/WEB-INF/contenido_titulacion_lista_titulaciones.jsp" %>
 
     </div>
 

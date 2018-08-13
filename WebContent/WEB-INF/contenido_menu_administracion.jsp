@@ -45,6 +45,6 @@
 
 </center>
 <br/>
-<h3><html:link forward="welcome">Salir</html:link></h3>
+<h3><html:link action="/verTitulaciones.do">Salir</html:link></h3>
 
 
