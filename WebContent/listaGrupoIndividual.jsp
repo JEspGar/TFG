@@ -8,6 +8,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
+<%@ taglib prefix="datatables" uri="http://github.com/dandelion/datatables" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,7 +34,7 @@
         <div id="content-wrap">
             <br/><br/><br/>
             <center><h2>Listado de Alumnos por Asignatura / Grupo </h2>
-                <h3>Titulación:
+                <h3>Titulacion:
                     <%
                                 String titulacion = (String) session.getAttribute("titulacion");
                                 out.println(titulacion);
@@ -55,42 +56,18 @@
                 %>
             </h4>
 
-            <center><table>
-                    <tr>
-                        <th>Numero</th>
-                        <th><center><strong>DNI</strong></center></th>
-
-                        <th><center><strong>APELLIDOS</strong></center></th>
-
-                        <th><center><strong>NOMBRE</strong></center></th>
-
-                        <th><center><strong>EMAIL</strong></center></th>
-                    </tr>
-                    <%
-                                int orden = 1;
-
-                    %>
-                    <logic:iterate id="inscrito" name="vectorAlumnosLista" scope="request" type="web.data.inscrito">
-                        <tr>
-                            <td><%out.print(orden);%></td>
-                            <td>
-                                <h4><bean:write name="inscrito" property="dni"></bean:write></h4>
-                            </td>
-                            <td>
-                                <h4><bean:write name="inscrito" property="apellidos"></bean:write></h4>
-                            </td>
-                            <td>
-                                <h4><bean:write name="inscrito" property="nombre" ></bean:write></h4>
-                            </td>
-                            <td><h4><bean:write name="inscrito" property="email"></bean:write></h4></td>
-                            <% orden++;%>
-                        </tr>
-
-                    </logic:iterate>
-                </table></center>
+            <center>
+	            <div id="tabla_alumnos" style="width:80%;">
+		            <datatables:table id="myTableId" data="${vectorAlumnosLista}" export="pdf,xls" dom="lEfrtiEp">
+					  <datatables:column title="DNI" property="dni" sortable="false" /> 
+					  <datatables:column title="NOMBRE" property="nombre" />
+					  <datatables:column title="APELLIDOS" property="apellidos" />
+					  <datatables:column title="EMAIL" property="email" /> 
+					</datatables:table>
+	            </div>
+           </center>
             <p><br/><br/><br/><br/></p>
             <html:link action="listadoAsignaturas" >Volver</html:link>
-
         </div>
 
     </body>
