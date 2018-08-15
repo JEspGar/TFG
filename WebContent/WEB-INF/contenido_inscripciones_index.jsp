@@ -44,3 +44,9 @@
 </table></center>
 
 <br/>
+<br>
+<h3> Si quieres cambiar de grupo alguna de tus inscripciones ve a la pantalla de inscripcion y selecciona el nuevo grupo haciendo la inscripcion con normalidad,
+ a continuacion sigue las instrucciones.</h3>
+<br/>
+<br/>
+<h1><html:link forward="welcome">CONTINUAR</html:link></h1>

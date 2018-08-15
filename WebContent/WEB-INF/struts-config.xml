@@ -27,6 +27,7 @@
         <forward name="dni_alumno" path="/dni_alumno.jsp"/>
         <forward name="menu_administracion" path="/admin/menu_index.jsp"/>
         <forward name="titulacion_form" path="/admin/alta_titulacion.jsp"/>
+        <forward name="error_generico" path="/admin/error_generico.jsp"/>
     </global-forwards>
 
     <action-mappings>
@@ -129,6 +130,8 @@
             <forward name="asignatura_insertada" path="/admin/asignatura_creada.jsp"/>
             <forward name="mantenimiento_form" path="/admin/modificacion_asignatura.jsp"/>
             <forward name="asignatura_borrada" path="/admin/asignatura_borrada.jsp"/>
+            <forward name="asignatura_activada" path="/admin/asignatura_activada.jsp"/>
+            <forward name="asignatura_inicializada" path="/admin/asignatura_borrada.jsp"/>
             <forward name="asignatura_modificada" path="/admin/asignatura_modificada.jsp"/>
             <forward name="error_titulaciones_index" path="/admin/error_titulaciones_index.jsp"/>
         </action>
@@ -145,7 +148,7 @@
             <forward name="error_creacion_titulacion" path="/admin/error_creacion_titulacion.jsp"/>
             <forward name="titulacion_insertada" path="/admin/titulacion_creada.jsp"/>
             <forward name="mantenimiento_form" path="/admin/modificacion_titulacion.jsp"/>
-            <forward name="titulacion_borrada" path="/admin/titulacion_borrada.jsp"/>
+            <forward name="titulacion_estado_modificado" path="/admin/titulacion_estado_modificado.jsp"/>
             <forward name="titulacion_modificada" path="/admin/titulacion_modificada.jsp"/>
             <forward name="error_titulaciones_index" path="/admin/error_titulaciones_index.jsp"/>
         </action>    
@@ -168,8 +171,10 @@
             <forward name="grupo_insertado" path="/admin/grupo_creado.jsp"/>
             <forward name="mantenimiento_form" path="/admin/modificacion_grupo.jsp"/>
             <forward name="grupo_borrado" path="/admin/grupo_borrado.jsp"/>
+            <forward name="estado_modificado" path="/admin/grupo_estado_modificado.jsp"/>
             <forward name="grupo_modificado" path="/admin/grupo_modificado.jsp"/>
-            <forward name="error_titulaciones_index" path="/admin/error_titulaciones_index.jsp"/>
+            <forward name="error_titulaciones_index" path="/error_titulaciones_index.jsp"/>
+            <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
         </action>
 
     </action-mappings>

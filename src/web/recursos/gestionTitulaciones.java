@@ -40,7 +40,7 @@ public class gestionTitulaciones
             Connection conexion = this.bbdd.getConexion();
 
             //Se prepara la query
-            String query  =  "SELECT * FROM titulaciones WHERE activa='s'";
+            String query  =  "SELECT * FROM titulaciones";
 
             //Se crea un vector de asignaturas
             Vector  vectorTitulaciones = new Vector();
@@ -220,6 +220,36 @@ public class gestionTitulaciones
 
         //Se prepara la query
         String query  = "UPDATE titulaciones SET activa='n' ";
+               query += "WHERE codigo='"+codTitulacion+"'";
+
+        try
+        {
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al borrar la titulacion de la base de datos: "+e.getMessage());
+            return valido;
+        }
+    }
+    
+    public boolean activarTitulacion(String codTitulacion)
+    {
+        boolean valido = false;
+
+        //Se prepara la query
+        String query  = "UPDATE titulaciones SET activa='s' ";
                query += "WHERE codigo='"+codTitulacion+"'";
 
         try

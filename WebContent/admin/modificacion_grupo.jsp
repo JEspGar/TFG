@@ -25,6 +25,16 @@ function submitFormBorrado()
 document.forms[0].action = "mantenimientoGrupo.do?method=borrarGrupo"
 document.forms[0].submit();
 }
+function submitFormDesactivar()
+{
+document.forms[0].action = "mantenimientoGrupo.do?method=desactivarGrupo"
+document.forms[0].submit();
+}
+function submitFormActivar()
+{
+document.forms[0].action = "mantenimientoGrupo.do?method=activarGrupo"
+document.forms[0].submit();
+}
 function volver () 
 {	 
 document.forms[0].action='<html:rewrite forward="menu_administracion"/>';

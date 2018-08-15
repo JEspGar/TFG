@@ -233,8 +233,8 @@ public class mantenimientoAsignatura extends DispatchAction
 		
 		}
 		
-		//Si no hay titulaciones o no se ha cumplido alguna condición anterior
-		return mapping.findForward("lista_titulaciones");		
+		//si se produce un error
+		return mapping.findForward("error_generico");		
 	}
     
     public ActionForward modificarAsignatura (ActionMapping mapping, ActionForm form,
@@ -285,7 +285,17 @@ public class mantenimientoAsignatura extends DispatchAction
 		//Definimos el objeto formulario
 		asignaturasForm formulario = (asignaturasForm)form;
 		
-		//Recuperamos el vector de titulaciones
+		//Buscamos los grupos correspondientes a la asignatura para desactivarlos
+		gestionGrupos gGrupos = new gestionGrupos(driver,url,usuario,password);
+		Vector grupos = gGrupos.listaGrupos(formulario.getCodigo());
+		Enumeration contador= grupos.elements();
+		boolean gruposDesactivados = true;
+		while (contador.hasMoreElements()) {
+			grupo grupo=(grupo)contador.nextElement();
+			gruposDesactivados = gruposDesactivados && gGrupos.desactivarGrupo(String.valueOf(grupo.getCodigoLab()));
+		}
+		
+		//Marcamos la asignatura como desactivada
 		gestionAsignaturas gAsignaturas = new gestionAsignaturas(driver,url,usuario,password);
 		boolean borrada = gAsignaturas.borrarAsignatura(formulario.getCodigo());
 		
@@ -294,7 +304,77 @@ public class mantenimientoAsignatura extends DispatchAction
 			return mapping.findForward("asignatura_borrada");		
 		}
 		
-		//Si no hay titulaciones o no se ha cumplido alguna condición anterior
-		return mapping.findForward("lista_titulaciones");		
+		//si se produce un error
+		return mapping.findForward("error_generico");		
+	}
+    
+    public ActionForward reactivarAsignatura (ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response)
+	{
+		//Obtenemos los datos de la conexion del fichero web.xml
+		String driver = this.getServlet().getServletContext().getInitParameter("driver");
+		String url = this.getServlet().getServletContext().getInitParameter("url_bbdd");
+		String usuario = this.getServlet().getServletContext().getInitParameter("usuario");
+		String password = this.getServlet().getServletContext().getInitParameter("password");
+		
+		//Definimos el objeto formulario
+		asignaturasForm formulario = (asignaturasForm)form;
+		
+		//Buscamos los grupos correspondientes a la asignatura para desactivarlos
+//		gestionGrupos gGrupos = new gestionGrupos(driver,url,usuario,password);
+//		Vector grupos = gGrupos.listaGrupos(formulario.getCodigo());
+//		Enumeration contador= grupos.elements();
+//		boolean gruposDesactivados = true;
+//		while (contador.hasMoreElements()) {
+//			grupo grupo=(grupo)contador.nextElement();
+//			gruposDesactivados = gruposDesactivados && gGrupos.desactivarGrupo(String.valueOf(grupo.getCodigoLab()));
+//		}
+		
+		//Marcamos la asignatura como desactivada
+		gestionAsignaturas gAsignaturas = new gestionAsignaturas(driver,url,usuario,password);
+		boolean borrada = gAsignaturas.activarAsignatura(formulario.getCodigo());
+		
+		//Si se ha borrado con exito
+		if (borrada){			
+			return mapping.findForward("asignatura_activada");		
+		}
+		
+		//si se produce un error
+		return mapping.findForward("error_generico");			
+	}
+    
+    public ActionForward inicializarAsignatura (ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response)
+	{
+		//Obtenemos los datos de la conexion del fichero web.xml
+		String driver = this.getServlet().getServletContext().getInitParameter("driver");
+		String url = this.getServlet().getServletContext().getInitParameter("url_bbdd");
+		String usuario = this.getServlet().getServletContext().getInitParameter("usuario");
+		String password = this.getServlet().getServletContext().getInitParameter("password");
+		
+		//Definimos el objeto formulario
+		asignaturasForm formulario = (asignaturasForm)form;
+		
+		//Buscamos los grupos correspondientes a la asignatura para borrarlos
+		gestionGrupos gGrupos = new gestionGrupos(driver,url,usuario,password);
+		gestionAlumnos gAlumnos = new gestionAlumnos(driver,url,usuario,password);
+		Vector grupos = gGrupos.listaGrupos(formulario.getCodigo());
+		Enumeration contador= grupos.elements();
+		boolean gruposBorrados = true;
+		boolean inscripBorradas = true;
+		while (contador.hasMoreElements()) {
+			grupo grupo=(grupo)contador.nextElement();
+			gruposBorrados = gruposBorrados && gGrupos.borrarGrupo(String.valueOf(grupo.getCodigoLab()));
+			//Borramos las inscripciones de el grupo correspondiente
+			inscripBorradas = inscripBorradas && gAlumnos.borrarInscripcionesGrupo(String.valueOf(grupo.getCodigoLab()));
+		}
+		
+		//Si se ha borrado con exito
+		if (gruposBorrados&&inscripBorradas){			
+			return mapping.findForward("asignatura_inicializada");		
+		}
+		
+		//si se produce un error
+		return mapping.findForward("error_generico");		
 	}
 }

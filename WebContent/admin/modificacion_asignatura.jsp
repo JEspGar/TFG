@@ -25,6 +25,16 @@ function submitFormBorrado()
 document.forms[0].action = "altaAsignatura.do?method=borrarAsignatura"
 document.forms[0].submit();
 }
+function submitFormActivacion()
+{
+document.forms[0].action = "altaAsignatura.do?method=reactivarAsignatura"
+document.forms[0].submit();
+}
+function submitFormInicializar()
+{
+document.forms[0].action = "altaAsignatura.do?method=inicializarAsignatura"
+document.forms[0].submit();
+}
 function volver () 
 {	 
 document.forms[0].action='<html:rewrite forward="menu_administracion"/>';

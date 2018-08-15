@@ -10,7 +10,7 @@
 <h1>Inscripci&oacute;n Laboratorios</h1>
 
 <br>
-<h3> Se ha borrado el grupo correctamente y todas las inscripciones de alumnos en el mismo.</h3>
+<h3> Se ha modificado el estado del grupo correctamente. Recuerda que las inscripciones de alumnos permanecen almacenadas en la base de datos.</h3>
 <br/>
 <br/>
 <h1><html:link forward="menu_administracion">CONTINUAR</html:link></h1>

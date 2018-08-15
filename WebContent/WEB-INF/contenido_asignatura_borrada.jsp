@@ -10,7 +10,8 @@
 <h1>Inscripci&oacute;n Laboratorios</h1>
 
 <br>
-<h3> Se ha borrado la asignatura correctamente.</h3>
+<h3> Se ha borrado la asignatura correctamente. Recuerda que se marca como inactiva en base de datos al igual que sus grupos y que los datos de incripciones
+permanecen almacenados</h3>
 <br/>
 <br/>
 <h1><html:link forward="menu_administracion">CONTINUAR</html:link></h1>

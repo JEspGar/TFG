@@ -299,7 +299,7 @@ public class mantenimientoGrupo extends DispatchAction
 		}
 		
 		//Si no hay titulaciones o no se ha cumplido alguna condición anterior
-		return mapping.findForward("error_titulaciones_index");		
+		return mapping.findForward("error_grupos_index");		
 	}
     
     public ActionForward buscarGrupo (ActionMapping mapping, ActionForm form,
@@ -377,6 +377,56 @@ public class mantenimientoGrupo extends DispatchAction
 		return mapping.findForward(pantalla);
 	}
     
+    public ActionForward desactivarGrupo (ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response)
+	{
+		//Obtenemos los datos de la conexion del fichero web.xml
+		String driver = this.getServlet().getServletContext().getInitParameter("driver");
+		String url = this.getServlet().getServletContext().getInitParameter("url_bbdd");
+		String usuario = this.getServlet().getServletContext().getInitParameter("usuario");
+		String password = this.getServlet().getServletContext().getInitParameter("password");
+		
+		//Definimos el objeto formulario
+		grupoForm formulario = (grupoForm)form;
+		
+		//Recuperamos el vector de titulaciones
+		gestionGrupos gGrupos = new gestionGrupos(driver,url,usuario,password);
+		boolean modificado = gGrupos.desactivarGrupo(formulario.getCodigoLab());
+		
+		//Si se ha borrado con exito
+		if (modificado){			
+			return mapping.findForward("estado_modificado");		
+		}
+		
+		//Si no hay titulaciones o no se ha cumplido alguna condición anterior
+		return mapping.findForward("mantenimiento_form");		
+	}
+    
+    public ActionForward activarGrupo (ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response)
+	{
+		//Obtenemos los datos de la conexion del fichero web.xml
+		String driver = this.getServlet().getServletContext().getInitParameter("driver");
+		String url = this.getServlet().getServletContext().getInitParameter("url_bbdd");
+		String usuario = this.getServlet().getServletContext().getInitParameter("usuario");
+		String password = this.getServlet().getServletContext().getInitParameter("password");
+		
+		//Definimos el objeto formulario
+		grupoForm formulario = (grupoForm)form;
+		
+		//Recuperamos el vector de titulaciones
+		gestionGrupos gGrupos = new gestionGrupos(driver,url,usuario,password);
+		boolean modificado = gGrupos.activarGrupo(formulario.getCodigoLab());
+		
+		//Si se ha borrado con exito
+		if (modificado){			
+			return mapping.findForward("estado_modificado");		
+		}
+		
+		//Si no hay titulaciones o no se ha cumplido alguna condición anterior
+		return mapping.findForward("mantenimiento_form");		
+	}
+    
     public ActionForward borrarGrupo (ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
 	{
@@ -392,6 +442,9 @@ public class mantenimientoGrupo extends DispatchAction
 		//Recuperamos el vector de titulaciones
 		gestionGrupos gGrupos = new gestionGrupos(driver,url,usuario,password);
 		boolean borrado = gGrupos.borrarGrupo(formulario.getCodigoLab());
+		
+		gestionAlumnos gAlumnos = new gestionAlumnos(driver,url,usuario,password);
+		boolean incripBorradas = gAlumnos.borrarInscripcionesGrupo(formulario.getCodigoLab());
 		
 		//Si se ha borrado con exito
 		if (borrado){			

@@ -43,6 +43,7 @@
 					  <datatables:column title="PLAZAS" property="plazas" />
 					  <datatables:column title="PLAZAS OCUPADAS" property="plazasOcupadas" />
 					  <datatables:column title="OBSERVACIONES" property="observaciones" />
+					  <datatables:column title="ACTIVO" property="activo" cssCellStyle="text-transform: uppercase;"/>
 					  <datatables:column><a href="mantenimientoGrupo.do?method=buscarGrupo&grupo=${grupo.codigoLab}" >Seleccionar</a></datatables:column>
 					  
 					</datatables:table>

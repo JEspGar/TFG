@@ -46,7 +46,9 @@
 
       <br />
       <html:submit property="method" value="Modificar" styleClass="button" onclick="submitForm()" />
-      <html:submit property="method" value="Borrar" styleClass="button" onclick="submitFormBorrado()" />
+      <html:submit property="method" value="Desactivar" styleClass="button" onclick="submitFormBorrado()" />
+      <html:submit property="method" value="Reactivar" styleClass="button" onclick="submitFormActivacion()" />
+      <html:submit property="method" value="Inicializar" styleClass="button" onclick="submitFormInicializar()" />
       <html:button property="method" styleClass="button" onclick="volver()">Volver</html:button>
 
 </html:form>

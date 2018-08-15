@@ -196,5 +196,35 @@ public class gestionAlumnos
         }
         
     }
+    
+    public boolean borrarInscripcionesGrupo(String codGrupo)
+    {
+        boolean valido = false;
+
+        //Se prepara la query
+        String query  = "DELETE FROM inscritos ";
+               query += "WHERE lab='"+codGrupo+"'";
+
+        try
+        {
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al borrar las inscripciones de la base de datos: "+e.getMessage());
+            return valido;
+        }
+    }
 
 }

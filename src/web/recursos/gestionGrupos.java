@@ -226,7 +226,7 @@ public class gestionGrupos
 
             //Se prepara la query
             String query =  "SELECT * FROM asignaturas ";
-                   query += "WHERE titulacion='"+codigo_titulacion+"'";
+                   query += "WHERE titulacion='"+codigo_titulacion+"' AND activa='s'";
 
             //Se crea un vector de asignaturas
             Vector  vectorAsignaturas = new Vector();
@@ -274,7 +274,7 @@ public class gestionGrupos
 
             //Se prepara la query
             String query =  "SELECT * FROM grupos ";
-                   query += "WHERE asignasoc='"+asignatura+"' AND activa='s'";
+                   query += "WHERE asignasoc='"+asignatura+"'";
 
             //Se crea un vector de asignaturas
             Vector  vectorGrupos = new Vector();
@@ -296,6 +296,7 @@ public class gestionGrupos
                 grupo.setObservaciones(resultado.getString("observaciones"));
                 grupo.setPlazas(Integer.parseInt(resultado.getString("plazas")));
                 grupo.setPlazasOcupadas(Integer.parseInt(resultado.getString("plazasocupadas")));
+                grupo.setActivo(resultado.getString("activa"));
 
                 //Se añade la asignatura al vector de asignaturas
                 vectorGrupos.add(grupo);
@@ -471,7 +472,67 @@ public class gestionGrupos
         boolean valido = false;
 
         //Se prepara la query
+        String query  = "DELETE FROM grupos ";
+               query += "WHERE codigolab='"+codGrupo+"'";
+
+        try
+        {
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al borrar la asignatura de la base de datos: "+e.getMessage());
+            return valido;
+        }
+    }
+    
+    public boolean desactivarGrupo(String codGrupo)
+    {
+        boolean valido = false;
+
+        //Se prepara la query
         String query  = "UPDATE grupos SET activa='n' ";
+               query += "WHERE codigolab='"+codGrupo+"'";
+
+        try
+        {
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al borrar la asignatura de la base de datos: "+e.getMessage());
+            return valido;
+        }
+    }
+    
+    public boolean activarGrupo(String codGrupo)
+    {
+        boolean valido = false;
+
+        //Se prepara la query
+        String query  = "UPDATE grupos SET activa='s' ";
                query += "WHERE codigolab='"+codGrupo+"'";
 
         try

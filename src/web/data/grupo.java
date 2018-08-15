@@ -15,6 +15,7 @@ public class grupo
     int plazas;
     int plazasOcupadas;
     String observaciones;
+    String activo;
 
     public String getAsigAsoc() {
         return asigAsoc;
@@ -56,7 +57,15 @@ public class grupo
         this.observaciones = observaciones;
     }
 
-    public int getPlazas() {
+    public String getActivo() {
+		return activo;
+	}
+
+	public void setActivo(String activo) {
+		this.activo = activo;
+	}
+
+	public int getPlazas() {
         return plazas;
     }
 

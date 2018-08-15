@@ -414,7 +414,7 @@ public class gestionAsignaturas
 
             //Se prepara la query
             String query =  "SELECT * FROM asignaturatotal ";
-                   query += "WHERE tit_nombre='"+nombre_titulacion+"'";
+                   query += "WHERE tit_nombre='"+nombre_titulacion+"' AND activa = 's'";
 
             //Se crea un vector de asignaturas
             Vector  vectorAsignaturas = new Vector();
@@ -691,6 +691,36 @@ public class gestionAsignaturas
         catch(SQLException e)
         {
             System.out.println("Error al borrar la asignatura de la base de datos: "+e.getMessage());
+            return valido;
+        }
+    }
+    
+    public boolean activarAsignatura(String codAsignatura)
+    {
+        boolean valido = false;
+
+        //Se prepara la query
+        String query  = "UPDATE asignaturas SET activa='s' ";
+               query += "WHERE codigo='"+codAsignatura+"'";
+
+        try
+        {
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al activar la asignatura de la base de datos: "+e.getMessage());
             return valido;
         }
     }

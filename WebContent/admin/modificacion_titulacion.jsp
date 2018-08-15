@@ -25,6 +25,11 @@ function submitFormBorrado()
 document.forms[0].action = "mantenimientoTitulacion.do?method=borrarTitulacion"
 document.forms[0].submit();
 }
+function submitFormActivar()
+{
+document.forms[0].action = "mantenimientoTitulacion.do?method=activarTitulacion"
+document.forms[0].submit();
+}
 function volver () 
 {	 
 document.forms[0].action='<html:rewrite forward="menu_administracion"/>';

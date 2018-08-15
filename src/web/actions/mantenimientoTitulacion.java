@@ -85,8 +85,8 @@ public class mantenimientoTitulacion extends DispatchAction
 		asignaturasForm formulario = new asignaturasForm();
 		
 		//Recuperamos el vector de titulaciones
-		gestionAsignaturas gAsignaturas = new gestionAsignaturas(driver,url,usuario,password);
-		Vector titulaciones = gAsignaturas.listaTitulaciones();
+		gestionTitulaciones gTitulaciones= new gestionTitulaciones(driver,url,usuario,password);
+		Vector titulaciones = gTitulaciones.listaTitulaciones();
 		Enumeration contador= titulaciones.elements();
 		ArrayList listaTitulaciones = new ArrayList();
 		while (contador.hasMoreElements()) {
@@ -196,7 +196,32 @@ public class mantenimientoTitulacion extends DispatchAction
 		
 		//Si se ha borrado con exito
 		if (borrada){			
-			return mapping.findForward("titulacion_borrada");		
+			return mapping.findForward("titulacion_estado_modificado");		
+		}
+		
+		//Si no hay titulaciones o no se ha cumplido alguna condición anterior
+		return mapping.findForward("lista_titulaciones");		
+	}
+    
+    public ActionForward activarTitulacion (ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response)
+	{
+		//Obtenemos los datos de la conexion del fichero web.xml
+		String driver = this.getServlet().getServletContext().getInitParameter("driver");
+		String url = this.getServlet().getServletContext().getInitParameter("url_bbdd");
+		String usuario = this.getServlet().getServletContext().getInitParameter("usuario");
+		String password = this.getServlet().getServletContext().getInitParameter("password");
+		
+		//Definimos el objeto formulario
+		titulacionForm formulario = (titulacionForm)form;
+		
+		//Recuperamos el vector de titulaciones
+		gestionTitulaciones gTitulaciones = new gestionTitulaciones(driver,url,usuario,password);
+		boolean borrada = gTitulaciones.activarTitulacion(formulario.getCodigo());
+		
+		//Si se ha borrado con exito
+		if (borrada){			
+			return mapping.findForward("titulacion_estado_modificado");		
 		}
 		
 		//Si no hay titulaciones o no se ha cumplido alguna condición anterior
