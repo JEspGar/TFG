@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registro_alumno
-    Created on : 17-sep-2009, 10:34:17
+    Document   : error_alumno_inscrito
+    Created on : 21-sep-2009, 10:45:48
     Author     : cc
 --%>
 
@@ -12,20 +12,8 @@
 
 <html:html>
 <head>
-    <title>Alta de Titulaciones</title>
+    <title>Inscripcion Laboratorios</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/inc/estilos.css">
-    <script type="text/javascript">
-function submitForm()
-{
-document.forms[0].action = "<%=request.getContextPath()%>/mantenimientoTitulacion.do?method=crear"
-document.forms[0].submit();
-}
-function volver () 
-{	 
-document.forms[0].action='<html:rewrite forward="menu_administracion"/>';
-document.forms[0].submit ();
-}
-</script>
 </head>
 
 <body>
@@ -43,7 +31,7 @@ document.forms[0].submit ();
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "/WEB-INF/contenido_alta_titulacion.jsp" %>
+           <%@include file = "/WEB-INF/contenido_error_creacion_grupo.jsp" %>
 
     </div>
 

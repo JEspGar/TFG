@@ -10,7 +10,7 @@
 <h1>Inscripci&oacute;n Laboratorios</h1>
 
 <br>
-<h3> Se ha borrado la asignatura correctamente.</h3>
+<h3> NO se pudo crear el grupo. Revise los datos introducidos.</h3>
 <br/>
 <br/>
-<h1><html:link forward="menu_administracion">CONTINUAR</html:link></h1>
+<h1><html:link forward="principal">CONTINUAR</html:link></h1>

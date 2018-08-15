@@ -40,7 +40,7 @@ public class gestionTitulaciones
             Connection conexion = this.bbdd.getConexion();
 
             //Se prepara la query
-            String query  =  "SELECT * FROM titulaciones ";
+            String query  =  "SELECT * FROM titulaciones WHERE activa='s'";
 
             //Se crea un vector de asignaturas
             Vector  vectorTitulaciones = new Vector();
@@ -190,7 +190,7 @@ public class gestionTitulaciones
         {	
 	        //Preparamos la query
 	        String query  = "UPDATE titulaciones ";
-	               query += "SET titulacion= '"+formulario.getTitulo().toLowerCase()+"' ";
+	               query += "SET titulacion= '"+formulario.getTitulo()+"' ";
 	               query += "WHERE codigo = '"+formulario.getCodigo()+"'";
 
         
@@ -219,7 +219,7 @@ public class gestionTitulaciones
         boolean valido = false;
 
         //Se prepara la query
-        String query  = "DELETE FROM titulaciones ";
+        String query  = "UPDATE titulaciones SET activa='n' ";
                query += "WHERE codigo='"+codTitulacion+"'";
 
         try

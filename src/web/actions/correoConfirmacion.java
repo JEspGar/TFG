@@ -31,7 +31,8 @@ public class correoConfirmacion extends Action
                           (String)sesion.getAttribute("carrera")+" los "+(String)sesion.getAttribute("dia")+
                           " a las "+(String)sesion.getAttribute("hora");
 
-         String hostSmtp = "correo.uah.es";
+//         String hostSmtp = "correo.uah.es";
+         String hostSmtp = "localhost";
          String puertoSMTP = "25";
          String origen = "noreply@uah.es";
 

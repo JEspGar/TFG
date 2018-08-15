@@ -12,18 +12,13 @@
 
 <html:html>
 <head>
-    <title>Alta de Titulaciones</title>
+    <title>Mantenimiento de Grupos</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/inc/estilos.css">
     <script type="text/javascript">
 function submitForm()
 {
-document.forms[0].action = "<%=request.getContextPath()%>/mantenimientoTitulacion.do?method=crear"
+document.forms[0].action = "mantenimientoGrupo.do?method=listarAsignaturas"
 document.forms[0].submit();
-}
-function volver () 
-{	 
-document.forms[0].action='<html:rewrite forward="menu_administracion"/>';
-document.forms[0].submit ();
 }
 </script>
 </head>
@@ -43,7 +38,7 @@ document.forms[0].submit ();
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "/WEB-INF/contenido_alta_titulacion.jsp" %>
+           <%@include file = "/WEB-INF/contenido_grupo_lista_titulaciones.jsp" %>
 
     </div>
 

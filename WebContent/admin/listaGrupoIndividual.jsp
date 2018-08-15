@@ -25,7 +25,7 @@
             <!-- El contenido de la cabecera empieza aqui -->
             <div id="header-content">
 
-                <%@include file = "WEB-INF/cabecera_index.jsp" %>
+                <%@include file = "/WEB-INF/cabecera_index.jsp" %>
 
             </div>
         </div>
@@ -62,12 +62,12 @@
 					  <datatables:column title="DNI" property="dni" sortable="false" /> 
 					  <datatables:column title="NOMBRE" property="nombre" />
 					  <datatables:column title="APELLIDOS" property="apellidos" />
-					  <datatables:column title="EMAIL" property="email" /> 
+					  <datatables:column title="EMAIL" property="email" cssCellStyle="text-transform: none;"/> 
 					</datatables:table>
 	            </div>
            </center>
-            <p><br/><br/><br/><br/></p>
-            <html:link action="listadoAsignaturas" >Volver</html:link>
+            <p><br/><br/></p>
+            <h3><html:link action="listadoAsignaturas" >Volver</html:link></h3>
         </div>
 
     </body>

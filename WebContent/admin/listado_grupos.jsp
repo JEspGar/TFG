@@ -24,7 +24,7 @@
             <!-- El contenido de la cabecera empieza aqui -->
             <div id="header-content">
 
-                <%@include file = "WEB-INF/cabecera_index.jsp" %>
+                <%@include file = "/WEB-INF/cabecera_index.jsp" %>
 
             </div>
         </div>

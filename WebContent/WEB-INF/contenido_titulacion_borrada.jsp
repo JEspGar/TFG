@@ -13,4 +13,4 @@
 <h3> Se ha borrado la titulacion correctamente.</h3>
 <br/>
 <br/>
-<h1><html:link forward="principal">CONTINUAR</html:link></h1>
+<h1><html:link forward="menu_administracion">CONTINUAR</html:link></h1>

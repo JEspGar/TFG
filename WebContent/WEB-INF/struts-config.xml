@@ -12,6 +12,7 @@
         <form-bean name="dniForm" type="web.forms.dniForm"/>
         <form-bean name="asignaturasForm" type="web.forms.asignaturasForm"/>
         <form-bean name="titulacionForm" type="web.forms.titulacionForm"/>
+        <form-bean name="grupoForm" type="web.forms.grupoForm"/>
         <form-bean name="loginForm" type="web.forms.LoginForm"/>
     </form-beans>
 
@@ -46,7 +47,7 @@
 
         <action path="/listadoAsignaturas"
                 type="web.actions.listadoAsignatura">
-            <forward name="listado_index" path="/listado_alumnos.jsp"/>
+            <forward name="listado_index" path="/admin/listado_alumnos.jsp"/>
             <forward name="error_listado_index" path="/error_listado_index.jsp"/>
             <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
         </action>
@@ -95,9 +96,9 @@
                 scope="request"
                 type="web.actions.opListados"
                 parameter="operacion">
-            <forward name="asignaturasListado" path="/listadoasignaturas.jsp"/>
-            <forward name="listadoGrupos" path="/listado_grupos.jsp"/>
-            <forward name="listaGrupoIndividual" path="/listaGrupoIndividual.jsp"/>
+            <forward name="asignaturasListado" path="/admin/listadoasignaturas.jsp"/>
+            <forward name="listadoGrupos" path="/admin/listado_grupos.jsp"/>
+            <forward name="listaGrupoIndividual" path="/admin/listaGrupoIndividual.jsp"/>
             <forward name="error_listado_index" path="/error_listado_index.jsp"/>
             <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
             
@@ -149,6 +150,27 @@
             <forward name="error_titulaciones_index" path="/admin/error_titulaciones_index.jsp"/>
         </action>    
 
+		<!--Accion para registrar un grupo-->
+         <action path="/mantenimientoGrupo"
+                name="grupoForm"
+                parameter="method"
+                scope="request"
+                input="/alta_grupo.jsp"
+                validate="false"
+                type="web.actions.mantenimientoGrupo">
+            <forward name="lista_titulaciones" path="/admin/mantenimiento_grupo_titulaciones.jsp"/>
+            <forward name="lista_asignaturas" path="/admin/mantenimiento_grupo_asignaturas.jsp"/>
+            <forward name="lista_titulaciones_modif" path="/admin/mantenimiento_grupo_titulaciones_modif.jsp"/>
+            <forward name="lista_asignaturas_modif" path="/admin/mantenimiento_grupo_asignaturas_modif.jsp"/>
+            <forward name="lista_grupos_modif" path="/admin/mantenimiento_grupo_grupos.jsp"/>
+            <forward name="datos_grupo" path="/admin/alta_grupo.jsp"/>
+            <forward name="error_creacion_grupo" path="/admin/error_creacion_grupo.jsp"/>
+            <forward name="grupo_insertado" path="/admin/grupo_creado.jsp"/>
+            <forward name="mantenimiento_form" path="/admin/modificacion_grupo.jsp"/>
+            <forward name="grupo_borrado" path="/admin/grupo_borrado.jsp"/>
+            <forward name="grupo_modificado" path="/admin/grupo_modificado.jsp"/>
+            <forward name="error_titulaciones_index" path="/admin/error_titulaciones_index.jsp"/>
+        </action>
 
     </action-mappings>
 

@@ -14,15 +14,16 @@ import java.text.SimpleDateFormat;
 import web.data.asignatura;
 import web.data.titulacion;
 import web.forms.asignaturasForm;
+import web.forms.grupoForm;
 import web.forms.registroForm;
 import web.data.grupo;
 
 
-public class gestionAsignaturas
+public class gestionGrupos
 {
     BBDD bbdd; //Base de Datos sobre la que se conectará
 
-    public gestionAsignaturas (String driver, String url, String usuario, String password)
+    public gestionGrupos (String driver, String url, String usuario, String password)
     {
         //Al instanciar esta clase crea un objeto BBDD
         //para permitir conexiones y desconexiones
@@ -175,162 +176,7 @@ public class gestionAsignaturas
         }
     }
 
-    public String nombreAsociado(String codAsignatura)
-    {
-        try
-        {
-            //Se obtiene una conexion
-            Connection conexion = this.bbdd.getConexion();
-
-            //Se prepara la query
-            String query  = "SELECT titulo FROM asignaturas ";
-                   query += "WHERE codigo='"+codAsignatura+"'";
-
-            //Se crea un nombre de asignatura
-            String  nombreAsignatura ="";
-
-            //Se ejecuta la query
-            Statement st = conexion.createStatement();
-            ResultSet resultado = st.executeQuery(query);
-
-            //Para cada fila se creará un objeto y se rellenará
-            //con los valores de las columnas.
-            if(resultado.next())
-            {
-                nombreAsignatura = resultado.getString("titulo");
-            }
-
-            //Se cierra la conexión
-            this.bbdd.cerrarConexion(conexion);
-
-            return nombreAsignatura;
-        }
-        catch(SQLException e)
-        {
-            System.out.println("Error al acceder a la asignatura en la Base de Datos: "+e.getMessage());
-            return null;
-        }
-    }
-    
-    public String codigoAsociado(String asignatura,String titulacion)
-    {
-        try
-        {
-            //Se obtiene una conexion
-            Connection conexion = this.bbdd.getConexion();
-
-            //Se prepara la query
-            String query  = "SELECT codigo FROM asignaturas ";
-                   query += "WHERE titulo='"+asignatura+"' AND titulacion='"+titulacion+"'";
-
-            //Se crea un codigo de asignatura
-            String  codigoAsignatura ="";
-
-            //Se ejecuta la query
-            Statement st = conexion.createStatement();
-            ResultSet resultado = st.executeQuery(query);
-
-            //Para cada fila se creará un objeto y se rellenará
-            //con los valores de las columnas.
-            if(resultado.next())
-            {
-                codigoAsignatura = resultado.getString("codigo");
-            }
-
-            //Se cierra la conexión
-            this.bbdd.cerrarConexion(conexion);
-
-            return codigoAsignatura;
-        }
-        catch(SQLException e)
-        {
-            System.out.println("Error al acceder a la asignatura en la Base de Datos: "+e.getMessage());
-            return null;
-        }
-    }
-
-    public String codigoTitAsociado(String carrera)
-    {
-        try
-        {
-            //Se obtiene una conexion
-            Connection conexion = this.bbdd.getConexion();
-
-            //Se prepara la query
-            String query  = "SELECT codigo FROM titulaciones ";
-                   query += "WHERE titulacion='"+carrera+"'";
-
-            //Se crea un codigo de titulacion
-            String  codigoTitulacion ="";
-
-            //Se ejecuta la query
-            Statement st = conexion.createStatement();
-            ResultSet resultado = st.executeQuery(query);
-
-            //Para cada fila se creará un objeto y se rellenará
-            //con los valores de las columnas.
-            if(resultado.next())
-            {
-                codigoTitulacion = resultado.getString("codigo");
-            }
-
-            //Se cierra la conexión
-            this.bbdd.cerrarConexion(conexion);
-
-            return codigoTitulacion;
-        }
-        catch(SQLException e)
-        {
-            System.out.println("Error al acceder a la titulacion en la Base de Datos: "+e.getMessage());
-            return null;
-        }
-    }
-
-    public void actualizarPlazas(String grupo)
-    {
-        try
-        {
-            int plazas;
-
-            //Se obtiene una conexion
-            Connection conexion = this.bbdd.getConexion();
-
-            //Se prepara la query
-            String query  = "SELECT plazasocupadas FROM grupos ";
-                   query += "WHERE codigolab='"+grupo+"'";
-
-            //Se ejecuta la query
-            Statement st = conexion.createStatement();
-            ResultSet resultado = st.executeQuery(query);
-
-            //Extraemos las plazas ocupadas actualmente y actualizamos
-            resultado.next();
-            plazas = resultado.getInt(1);
-            plazas += 1;
-
-            //Se prepara la query
-            String query2  = "UPDATE grupos ";
-                   query2 += "SET plazasocupadas='"+plazas+"' ";
-                   query2 += "WHERE codigolab='"+grupo+"'";
-
-            Statement st2 = conexion.createStatement();
-
-            //Se ejecuta la query
-            st2.executeUpdate(query2);
-
-            st2.close();
-
-            //Se cierra la conexión
-            this.bbdd.cerrarConexion(conexion);
-
-        }
-        catch(SQLException e)
-        {
-            System.out.println("Error al actualizar las plazas en la Base de Datos: "+e.getMessage());
-        }
-    }
-
-    public void datosGrupo(grupo grupo, String codGrupo)
+    public grupo datosGrupo(String codGrupo)
     {
         try
         {
@@ -344,114 +190,32 @@ public class gestionAsignaturas
             //Se ejecuta la query
             Statement st = conexion.createStatement();
             ResultSet resultado = st.executeQuery(query);
+            
+            grupo grupo=new grupo();
 
             //Extraemos las plazas ocupadas actualmente y actualizamos
             if(resultado.next())
             {                
+            	grupo.setAsigAsoc(resultado.getString("asignasoc"));
+                grupo.setCodigoLab(Integer.parseInt(resultado.getString("codigolab")));
                 grupo.setDia(resultado.getString("dia"));
                 grupo.setHora(resultado.getString("hora"));
                 grupo.setObservaciones(resultado.getString("observaciones"));
+                grupo.setPlazas(Integer.parseInt(resultado.getString("plazas")));
+                grupo.setPlazasOcupadas(Integer.parseInt(resultado.getString("plazasocupadas")));
             }
 
             //Se cierra la conexión
             this.bbdd.cerrarConexion(conexion);
 
+            return grupo;
         }
         catch(SQLException e)
         {
             System.out.println("Error al extraer los datos del grupo en la Base de Datos: "+e.getMessage());
-        }
-    }
-
-    public boolean grupoCompleto(String codGrupo)
-    {
-        try
-        {
-            boolean completo = false;
-
-            int plazas,plazasOcupadas;
-
-            //Se obtiene una conexion
-            Connection conexion = this.bbdd.getConexion();
-
-            //Se prepara la query
-            String query  = "SELECT * FROM grupos ";
-                   query += "WHERE codigolab='"+codGrupo+"'";
-
-            //Se ejecuta la query
-            Statement st = conexion.createStatement();
-            ResultSet resultado = st.executeQuery(query);
-
-            //Extraemos las plazas ocupadas actualmente y actualizamos
-            if(resultado.next())
-            {
-                plazas = resultado.getInt("plazas");
-                plazasOcupadas = resultado.getInt("plazasocupadas");
-
-                completo = (plazas - plazasOcupadas <= 0);
-            }
-
-            //Se cierra la conexión
-            this.bbdd.cerrarConexion(conexion);
-
-            return completo;
-
-        }
-        catch(SQLException e)
-        {
-            System.out.println("Error al extraer los datos del grupo en la Base de Datos: "+e.getMessage());
-            return false;
-        }
-    }
-
-     //Devuelve un vector con todas las asignaturas
-    public Vector listaAsignaturasTotal(String nombre_titulacion)
-    {
-        try
-        {            
-            //Se obtiene una conexion
-            Connection conexion = this.bbdd.getConexion();
-
-            //Se prepara la query
-            String query =  "SELECT * FROM asignaturatotal ";
-                   query += "WHERE tit_nombre='"+nombre_titulacion+"'";
-
-            //Se crea un vector de asignaturas
-            Vector  vectorAsignaturas = new Vector();
-
-            //Se ejecuta la query
-            Statement st = conexion.createStatement();
-            ResultSet resultado = st.executeQuery(query);
-
-            //Para cada fila se creará un objeto y se rellenará
-            //con los valores de las columnas.
-            while(resultado.next())
-            {
-                asignatura asignatura = new asignatura();
-
-                asignatura.setCodigo(resultado.getString("codigo"));
-                asignatura.setTitulo(resultado.getString("titulo"));
-                asignatura.setFechaInicio(resultado.getDate("fechainicio"));
-                asignatura.setFechaFin(resultado.getDate("fechafin"));
-                asignatura.setResponsable(resultado.getString("responsable"));
-                asignatura.setEmail(resultado.getString("email"));
-                asignatura.setTelefono(resultado.getString("telefono"));
-
-                //Se añade la asignatura al vector de asignaturas
-                vectorAsignaturas.add(asignatura);
-            }
-
-            //Se cierra la conexión
-            this.bbdd.cerrarConexion(conexion);
-
-            return vectorAsignaturas;
-        }
-        catch(SQLException e)
-        {
-            System.out.println("Error al acceder a las asignaturas de la Base de Datos: "+e.getMessage());
             return null;
         }
-    }
+    }    
     
     public Vector listaAsignaturasTitulacion(String codigo_titulacion)
     {
@@ -497,6 +261,54 @@ public class gestionAsignaturas
         catch(SQLException e)
         {
             System.out.println("Error al acceder a las asignaturas de la Base de Datos: "+e.getMessage());
+            return null;
+        }
+    }
+    
+    public Vector listaGruposAsignatura(String asignatura)
+    {
+        try
+        {            
+            //Se obtiene una conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Se prepara la query
+            String query =  "SELECT * FROM grupos ";
+                   query += "WHERE asignasoc='"+asignatura+"' AND activa='s'";
+
+            //Se crea un vector de asignaturas
+            Vector  vectorGrupos = new Vector();
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            //Para cada fila se creará un objeto y se rellenará
+            //con los valores de las columnas.
+            while(resultado.next())
+            {
+                grupo grupo = new grupo();
+
+                grupo.setAsigAsoc(resultado.getString("asignasoc"));
+                grupo.setCodigoLab(Integer.parseInt(resultado.getString("codigolab")));
+                grupo.setDia(resultado.getString("dia"));
+                grupo.setHora(resultado.getString("hora"));
+                grupo.setObservaciones(resultado.getString("observaciones"));
+                grupo.setPlazas(Integer.parseInt(resultado.getString("plazas")));
+                grupo.setPlazasOcupadas(Integer.parseInt(resultado.getString("plazasocupadas")));
+
+                //Se añade la asignatura al vector de asignaturas
+                vectorGrupos.add(grupo);
+            }
+
+            //Se cierra la conexión
+            this.bbdd.cerrarConexion(conexion);
+
+            return vectorGrupos;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al acceder a los grupos de la Base de Datos: "+e.getMessage());
             return null;
         }
     }
@@ -589,22 +401,17 @@ public class gestionAsignaturas
         }
     }
     
-    public boolean registrarAsignatura (asignaturasForm formulario)
+    public boolean registrarGrupo (grupoForm formulario)
     {
     	boolean valido = false;
     	try{	
-	        SimpleDateFormat formato1 = new SimpleDateFormat("dd/MM/yyyy");
-	        Date fechaInicio = formato1.parse(formulario.getFechaInicio());
-	        Date fechaFin = formato1.parse(formulario.getFechaFin());
-	        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	
+	    
 	        //Preparamos la query
-	        String query  = "INSERT INTO asignaturas ";
-	               query += "(codigo,titulo,fechainicio,fechafin,responsable,email,telefono,titulacion) ";
+	        String query  = "INSERT INTO grupos ";
+	               query += "(asignasoc,dia,hora,plazas,observaciones) ";
 	
-	               query += "VALUES ('"+formulario.getCodigo()+"','"+formulario.getTitulo().toLowerCase()+"','"+
-	            		   formato.format(fechaInicio)+"','"+formato.format(fechaFin)+"','"+formulario.getResponsable().toLowerCase()+"','"+
-	                        formulario.getEmail().toLowerCase()+"','"+formulario.getTelefono()+"','"+formulario.getTitulacion()+"')";
+	               query += "VALUES ('"+formulario.getAsigAsoc()+"','"+formulario.getDia()+"','"+
+	            		   formulario.getHora()+"','"+formulario.getPlazas()+"','"+formulario.getObservaciones()+"')";
 
         
             Connection conexion=bbdd.getConexion();
@@ -620,29 +427,23 @@ public class gestionAsignaturas
             return valido;
 
         }
-        catch(SQLException | ParseException e)
+        catch(SQLException e)
         {
             System.out.println("Error al inscribir al alumno en la Base de Datos: "+e.getMessage());
             return valido;
         }
     }
     
-    public boolean modificarAsignatura (asignaturasForm formulario)
+    public boolean modificarGrupo (grupoForm formulario)
     {
     	 boolean valido = false;
     	try
-        {
-    		SimpleDateFormat formato1 = new SimpleDateFormat("dd/MM/yyyy");
-	        Date fechaInicio = formato1.parse(formulario.getFechaInicio());
-	        Date fechaFin = formato1.parse(formulario.getFechaFin());
-	        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	
+        {	
 	        //Preparamos la query
-	        String query  = "UPDATE asignaturas ";
-	               query += "SET titulo= '"+formulario.getTitulo()+"', ";
-	               query += "fechainicio = '"+formato.format(fechaInicio)+"', fechafin = '"+formato.format(fechaFin)+"', ";
-	               query += "responsable = '"+formulario.getResponsable()+"', email = '"+formulario.getEmail().toLowerCase()+"', ";
-	               query += "telefono = '"+formulario.getTelefono()+"' WHERE codigo = '"+formulario.getCodigo()+"'";
+	        String query  = "UPDATE grupos ";
+	               query += "SET dia= '"+formulario.getDia()+"', ";
+	               query += "hora = '"+formulario.getHora()+"', plazas = '"+formulario.getPlazas()+"', ";
+	               query += "observaciones = '"+formulario.getObservaciones()+"' WHERE codigolab = '"+formulario.getCodigoLab()+"'";
 
         
             Connection conexion=bbdd.getConexion();
@@ -658,20 +459,20 @@ public class gestionAsignaturas
             return valido;
 
         }
-        catch(SQLException | ParseException e)
+        catch(SQLException e)
         {
-            System.out.println("Error al actualizar la asignatura: "+e.getMessage());
+            System.out.println("Error al actualizar el grupo: "+e.getMessage());
             return valido;
         }
     }
     
-    public boolean borrarAsignatura(String codAsignatura)
+    public boolean borrarGrupo(String codGrupo)
     {
         boolean valido = false;
 
         //Se prepara la query
-        String query  = "UPDATE asignaturas SET activa='n' ";
-               query += "WHERE codigo='"+codAsignatura+"'";
+        String query  = "UPDATE grupos SET activa='n' ";
+               query += "WHERE codigolab='"+codGrupo+"'";
 
         try
         {

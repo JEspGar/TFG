@@ -43,6 +43,18 @@
    </tr>
    <tr>
        <td>
+           <h3><html:link action="/mantenimientoGrupo.do?method=listarTitulaciones">Crear Grupo</html:link>
+           </h3>
+       </td>    
+   </tr>
+   <tr>
+       <td>
+           <h3><html:link action="/mantenimientoGrupo.do?method=listarTitulacionesMod">Mantener Grupo</html:link>
+           </h3>
+       </td>    
+   </tr>
+   <tr>
+       <td>
            <h3><html:link action="/listadoAsignaturas.do">Consultar Listados</html:link>
            </h3>
        </td>    

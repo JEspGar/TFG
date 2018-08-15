@@ -10,7 +10,7 @@
 <h1>Inscripci&oacute;n Laboratorios</h1>
 
 <br>
-<h3> Se ha borrado la asignatura correctamente.</h3>
+<h3> Se ha creado el grupo correctamente.</h3>
 <br/>
 <br/>
 <h1><html:link forward="menu_administracion">CONTINUAR</html:link></h1>
