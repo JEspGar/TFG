@@ -14,9 +14,27 @@
 	      <param-value>/login.jsp</param-value>
 	    </init-param>
   	</filter>
+  	<filter>
+	    <filter-name>profesorAccessFilter</filter-name>
+	    <filter-class> 
+	    	web.security.AuthorizationFilter  
+	  	</filter-class>
+	    <init-param>
+	      <param-name>roles</param-name>
+	      <param-value>profesor admin</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>onError</param-name>
+	      <param-value>/login.jsp</param-value>
+	    </init-param>
+  	</filter>
     <filter-mapping>
 	    <filter-name>adminAccessFilter</filter-name>
 	    <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+	    <filter-name>profesorAccessFilter</filter-name>
+	    <url-pattern>/profesor/*</url-pattern>
     </filter-mapping>
     <!-- Dandelion filter definition and mapping -->
 	<filter>

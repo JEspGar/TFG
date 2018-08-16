@@ -38,7 +38,7 @@ document.forms[0].submit();
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "/WEB-INF/contenido_lista_titulaciones.jsp" %>
+           <%@include file = "/admin/contenido/contenido_lista_titulaciones.jsp" %>
 
     </div>
 

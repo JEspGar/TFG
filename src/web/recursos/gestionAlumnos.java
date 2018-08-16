@@ -227,4 +227,102 @@ public class gestionAlumnos
         }
     }
 
+    public String datosAlumnoInscrito(String dni, String asignatura)
+    {
+        String inscripcion = "";
+
+        try
+        {
+            //Se abre la conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Formamos la query
+            String query  = "SELECT inscripcion, email FROM inscritos ";
+                   query += "WHERE dni='"+dni+"' and asignatura='"+asignatura+"'";
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            if(resultado.next())
+            {
+	            inscripcion = resultado.getString("inscripcion");
+	            inscripcion = inscripcion +"&"+resultado.getString("email");
+            }
+            //Cerramos la conexion
+            this.bbdd.cerrarConexion(conexion);
+
+            return inscripcion;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al acceder a la base de datos para verificar el usuario: "+e.getMessage());
+            return inscripcion;
+        }
+    }
+    
+    public String grupoInscripcion(String inscripcion)
+    {
+        String grupo = "";
+
+        try
+        {
+            //Se abre la conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Formamos la query
+            String query  = "SELECT lab FROM inscritos ";
+                   query += "WHERE inscripcion='"+inscripcion+"'";
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            if(resultado.next())
+            {
+	            grupo = resultado.getString("lab");
+            }
+            //Cerramos la conexion
+            this.bbdd.cerrarConexion(conexion);
+
+            return grupo;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al acceder a la base de datos para obtener el grupo: "+e.getMessage());
+            return inscripcion;
+        }
+    }
+    
+    public boolean modificarInscripcion(String codInscrip, String lab)
+    {
+        boolean valido = false;
+
+        //Se prepara la query
+        String query  = "UPDATE inscritos SET lab='"+lab+"' ";
+               query += "WHERE inscripcion='"+codInscrip+"'";
+
+        try
+        {
+            Connection conexion=bbdd.getConexion();
+            Statement st=conexion.createStatement();
+
+            //Se ejecuta la query
+            st.execute(query);
+
+            st.close();
+            bbdd.cerrarConexion(conexion);
+            
+            valido = true;
+            return valido;
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al modificar las inscripciones de la base de datos: "+e.getMessage());
+            return valido;
+        }
+    }
 }

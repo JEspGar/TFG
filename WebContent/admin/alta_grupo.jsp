@@ -43,7 +43,7 @@ document.forms[0].submit ();
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "/WEB-INF/contenido_alta_grupo.jsp" %>
+           <%@include file = "/profesor/contenido/contenido_alta_grupo.jsp" %>
 
     </div>
 

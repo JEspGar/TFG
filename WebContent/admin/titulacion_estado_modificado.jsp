@@ -31,7 +31,7 @@
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "/WEB-INF/contenido_titulacion_estado_modificado.jsp" %>
+           <%@include file = "/admin/contenido/contenido_titulacion_estado_modificado.jsp" %>
 
     </div>
 

@@ -28,6 +28,7 @@
         <forward name="menu_administracion" path="/admin/menu_index.jsp"/>
         <forward name="titulacion_form" path="/admin/alta_titulacion.jsp"/>
         <forward name="error_generico" path="/admin/error_generico.jsp"/>
+        <forward name="menu_profesor" path="/profesor/menu_index.jsp"/>
     </global-forwards>
 
     <action-mappings>
@@ -38,6 +39,7 @@
 				scope="request"
 				validate="true">
 			<forward name="adminsuccess" path="/admin/menu_index.jsp"/>
+			<forward name="profesorsuccess" path="/profesor/menu_index.jsp"/>
 			<forward name="failure" path="/login.jsp"/>
  	    </action>
  	    
@@ -46,9 +48,9 @@
  	   		<forward name="success" path="verTitulaciones.do" redirect="true"/>
  	   </action>
 
-        <action path="/listadoAsignaturas"
+        <action path="/profesor/listadoAsignaturas"
                 type="web.actions.listadoAsignatura">
-            <forward name="listado_index" path="/admin/listado_alumnos.jsp"/>
+            <forward name="listado_index" path="/profesor/listado_alumnos.jsp"/>
             <forward name="error_listado_index" path="/error_listado_index.jsp"/>
             <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
         </action>
@@ -58,14 +60,23 @@
             <forward name="titulaciones_index" path="/titulaciones_index.jsp"/>
             <forward name="error_titulaciones_index" path="/error_titulaciones_index.jsp"/>
         </action>
+        
         <!--Accion para registrar un alumno-->
         <action path="/registroAlumno"
                 name="registroForm"
+                parameter="method"
                 scope="request"
                 input="/registro_alumno.jsp"
+                validate="false"
                 type="web.actions.registroAlumno">
+            <forward name="formulario_registro" path="/registro_alumno.jsp"/>
             <forward name="alumno_inscrito" path="/alumno_inscrito.jsp"/>
             <forward name="error_alumno_inscrito" path="/error_alumno_inscrito.jsp"/>
+            <forward name="modificar_inscripcion" path="/modificar_inscripcion.jsp"/>
+            <forward name="grupo_completo" path="/grupo_completo.jsp"/>
+            <forward name="alumno_inscrito_previamente" path="/alumno_inscrito_previamente.jsp"/>
+            <forward name="inscripcion_modificada" path="/inscripcion_modificada.jsp"/>
+            <forward name="error_inscripcion_modificada" path="/error_inscripcion_modificada.jsp"/>
         </action>
 
         <!--Accion para ver las inscripciones de un alumno-->
@@ -97,9 +108,9 @@
                 scope="request"
                 type="web.actions.opListados"
                 parameter="operacion">
-            <forward name="asignaturasListado" path="/admin/listadoasignaturas.jsp"/>
-            <forward name="listadoGrupos" path="/admin/listado_grupos.jsp"/>
-            <forward name="listaGrupoIndividual" path="/admin/listaGrupoIndividual.jsp"/>
+            <forward name="asignaturasListado" path="/profesor/listadoasignaturas.jsp"/>
+            <forward name="listadoGrupos" path="/profesor/listado_grupos.jsp"/>
+            <forward name="listaGrupoIndividual" path="/profesor/listaGrupoIndividual.jsp"/>
             <forward name="error_listado_index" path="/error_listado_index.jsp"/>
             <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
             
@@ -116,7 +127,7 @@
         </action>
         
         <!--Accion para registrar una asignatura-->
-         <action path="/altaAsignatura"
+         <action path="/admin/altaAsignatura"
                 name="asignaturasForm"
                 parameter="method"
                 scope="request"
@@ -137,7 +148,7 @@
         </action>
         
         <!--Accion para registrar una titulacion-->
-         <action path="/mantenimientoTitulacion"
+         <action path="/admin/mantenimientoTitulacion"
                 name="titulacionForm"
                 parameter="method"
                 scope="request"
@@ -154,25 +165,27 @@
         </action>    
 
 		<!--Accion para registrar un grupo-->
-         <action path="/mantenimientoGrupo"
+         <action path="/profesor/mantenimientoGrupo"
                 name="grupoForm"
                 parameter="method"
                 scope="request"
                 input="/alta_grupo.jsp"
                 validate="false"
                 type="web.actions.mantenimientoGrupo">
-            <forward name="lista_titulaciones" path="/admin/mantenimiento_grupo_titulaciones.jsp"/>
-            <forward name="lista_asignaturas" path="/admin/mantenimiento_grupo_asignaturas.jsp"/>
-            <forward name="lista_titulaciones_modif" path="/admin/mantenimiento_grupo_titulaciones_modif.jsp"/>
-            <forward name="lista_asignaturas_modif" path="/admin/mantenimiento_grupo_asignaturas_modif.jsp"/>
-            <forward name="lista_grupos_modif" path="/admin/mantenimiento_grupo_grupos.jsp"/>
-            <forward name="datos_grupo" path="/admin/alta_grupo.jsp"/>
-            <forward name="error_creacion_grupo" path="/admin/error_creacion_grupo.jsp"/>
-            <forward name="grupo_insertado" path="/admin/grupo_creado.jsp"/>
-            <forward name="mantenimiento_form" path="/admin/modificacion_grupo.jsp"/>
-            <forward name="grupo_borrado" path="/admin/grupo_borrado.jsp"/>
-            <forward name="estado_modificado" path="/admin/grupo_estado_modificado.jsp"/>
-            <forward name="grupo_modificado" path="/admin/grupo_modificado.jsp"/>
+            <forward name="lista_titulaciones" path="/profesor/mantenimiento_grupo_titulaciones.jsp"/>
+            <forward name="lista_asignaturas" path="/profesor/mantenimiento_grupo_asignaturas.jsp"/>
+            <forward name="lista_titulaciones_modif" path="/profesor/mantenimiento_grupo_titulaciones_modif.jsp"/>
+            <forward name="lista_asignaturas_modif" path="/profesor/mantenimiento_grupo_asignaturas_modif.jsp"/>
+            <forward name="lista_grupos_modif_profesor" path="/profesor/mantenimiento_grupo_grupos.jsp"/>
+            <forward name="lista_grupos_modif_admin" path="/admin/mantenimiento_grupo_grupos.jsp"/>
+            <forward name="datos_grupo_profesor" path="/profesor/alta_grupo.jsp"/>
+            <forward name="datos_grupo_admin" path="/admin/alta_grupo.jsp"/>
+            <forward name="error_creacion_grupo" path="/profesor/error_creacion_grupo.jsp"/>
+            <forward name="grupo_insertado" path="/profesor/grupo_creado.jsp"/>
+            <forward name="mantenimiento_form" path="/profesor/modificacion_grupo.jsp"/>
+            <forward name="grupo_borrado" path="/profesor/grupo_borrado.jsp"/>
+            <forward name="estado_modificado" path="/profesor/grupo_estado_modificado.jsp"/>
+            <forward name="grupo_modificado" path="/profesor/grupo_modificado.jsp"/>
             <forward name="error_titulaciones_index" path="/error_titulaciones_index.jsp"/>
             <forward name="error_grupos_index" path="/error_grupos_index.jsp"/>
         </action>

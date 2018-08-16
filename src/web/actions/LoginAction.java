@@ -34,8 +34,8 @@ public class LoginAction extends BaseAction {
 			request.getSession().setAttribute("user", user);
 			if (user.hasRole("admin"))
 				return findForwardAdminSuccess(mapping);
-			else
-				return findForwardUserSuccess(mapping);
+			else if(user.hasRole("profesor"))
+				return findForwardProfesorSuccess(mapping);
 		}
 		ActionErrors errors = new ActionErrors();
 		errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage(

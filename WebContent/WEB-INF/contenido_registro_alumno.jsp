@@ -18,7 +18,7 @@
  %>
 
 <!-- Formulario de registro de clientes -->
-<html:form action="/registroAlumno"  method="post">
+<html:form action="/registroAlumno.do?method=registrar"  method="post">
 
       <label>DNI</label>
       <html:text property="dni" value="" size="29"></html:text>

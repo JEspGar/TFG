@@ -13,8 +13,8 @@ public class BaseAction extends Action {
 		return mapping.findForward("adminsuccess");
 	}
 	
-	protected ActionForward findForwardUserSuccess(ActionMapping mapping) {
-		return mapping.findForward("usersuccess");
+	protected ActionForward findForwardProfesorSuccess(ActionMapping mapping) {
+		return mapping.findForward("profesorsuccess");
 	}
 	
 	protected ActionForward findForwardFailure(ActionMapping mapping) {

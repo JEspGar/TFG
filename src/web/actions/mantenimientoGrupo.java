@@ -50,8 +50,17 @@ public class mantenimientoGrupo extends DispatchAction
     	           
            //Se guardan los errores en la request
            saveErrors(request, errores);
+           
+         //setteamos la pantalla segun el rol
+	   		String pantalla="";
+	   		HttpSession sesion = request.getSession(false);
+	   		User user = (User) sesion.getAttribute("user");
+	   		if (user.hasRole("admin"))
+	   			pantalla="datos_grupo_admin";
+	   		else if(user.hasRole("profesor"))
+	   			pantalla="datos_grupo_profesor";
 
-           return mapping.findForward("datos_grupo");
+           return mapping.findForward(pantalla);
 
        }else {
     	   insertada = gGrupos.registrarGrupo(formulario);
@@ -158,8 +167,17 @@ public class mantenimientoGrupo extends DispatchAction
 		
 		request.setAttribute("grupoForm", formulario);
 		
+		//setteamos la pantalla segun el rol
+		String pantalla="";
+		HttpSession sesion = request.getSession(false);
+		User user = (User) sesion.getAttribute("user");
+		if (user.hasRole("admin"))
+			pantalla="datos_grupo_admin";
+		else if(user.hasRole("profesor"))
+			pantalla="datos_grupo_profesor";
+		
 		//Si no hay titulaciones o no se ha cumplido alguna condición anterior
-		return mapping.findForward("datos_grupo");		
+		return mapping.findForward(pantalla);		
 	}
       
     public ActionForward buscarTitulacion (ActionMapping mapping, ActionForm form,
@@ -287,6 +305,15 @@ public class mantenimientoGrupo extends DispatchAction
 		gestionGrupos gGrupos = new gestionGrupos(driver,url,usuario,password);
 		Vector grupos = gGrupos.listaGruposAsignatura(formulario.getAsigAsoc());
 		
+		//setteamos la pantalla segun el rol
+		String pantalla="";
+		HttpSession sesion = request.getSession(false);
+		User user = (User) sesion.getAttribute("user");
+		if (user.hasRole("admin"))
+			pantalla="lista_grupos_modif_admin";
+		else if(user.hasRole("profesor"))
+			pantalla="lista_grupos_modif_profesor";
+		
 		//Si hay titulaciones
 		if (grupos != null && grupos.size() > 0)
 		{
@@ -294,7 +321,7 @@ public class mantenimientoGrupo extends DispatchAction
 			request.setAttribute("grupos", grupos);
 			request.setAttribute("grupoForm", formulario);
 			
-			return mapping.findForward("lista_grupos_modif");
+			return mapping.findForward(pantalla);
 		
 		}
 		

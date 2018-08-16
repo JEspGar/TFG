@@ -329,6 +329,50 @@ public class gestionAsignaturas
             System.out.println("Error al actualizar las plazas en la Base de Datos: "+e.getMessage());
         }
     }
+    
+    public void actualizarPlazasBaja(String grupo)
+    {
+        try
+        {
+            int plazas;
+
+            //Se obtiene una conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Se prepara la query
+            String query  = "SELECT plazasocupadas FROM grupos ";
+                   query += "WHERE codigolab='"+grupo+"'";
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            //Extraemos las plazas ocupadas actualmente y actualizamos
+            resultado.next();
+            plazas = resultado.getInt(1);
+            plazas -= 1;
+
+            //Se prepara la query
+            String query2  = "UPDATE grupos ";
+                   query2 += "SET plazasocupadas='"+plazas+"' ";
+                   query2 += "WHERE codigolab='"+grupo+"'";
+
+            Statement st2 = conexion.createStatement();
+
+            //Se ejecuta la query
+            st2.executeUpdate(query2);
+
+            st2.close();
+
+            //Se cierra la conexión
+            this.bbdd.cerrarConexion(conexion);
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al actualizar las plazas en la Base de Datos: "+e.getMessage());
+        }
+    }
 
     public void datosGrupo(grupo grupo, String codGrupo)
     {
