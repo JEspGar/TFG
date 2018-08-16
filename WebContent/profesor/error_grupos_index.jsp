@@ -1,6 +1,6 @@
 <%-- 
-    Document   : error_titulaciones_index
-    Created on : 16-sep-2009, 10:34:45
+    Document   : error_grupos_index
+    Created on : 16-sep-2009, 12:26:50
     Author     : cc
 --%>
 
@@ -13,7 +13,7 @@
 <html:html>
 <head>
     <title>Inscripcion Laboratorios</title>
-    <link rel="stylesheet" type="text/css" href="inc/estilos.css">
+    <link rel="stylesheet" type="text/css" href="../inc/estilos.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
         <!-- El contenido de la cabecera empieza aqui -->
         <div id="header-content">
 
-            <%@include file = "WEB-INF/cabecera_index.jsp" %>
+            <%@include file = "/WEB-INF/cabecera_index.jsp" %>
 
         </div>
     </div>
@@ -31,7 +31,7 @@
      <!-- El contenedor de contenido empieza aquí. -->
     <div id="content-wrap">
 
-           <%@include file = "WEB-INF/contenido_error_listado_index.jsp" %>
+           <%@include file = "/WEB-INF/contenido_error_grupos_index.jsp" %>
 
     </div>
 

@@ -15,7 +15,7 @@
 <html:html>
     <head>
         <title>Listado de Alumnos por Asignatura / Grupo</title>
-        <link rel="stylesheet" type="text/css" href="inc/estilos.css">
+        <link rel="stylesheet" type="text/css" href="../inc/estilos.css">
     </head>
 
     <body>
@@ -53,10 +53,10 @@
                     </tr>
                 <logic:iterate id="grupo" name="vectorGrupos" scope="request" type="web.data.grupo">
                         <tr>                            
-                            <td><html:link action="/opListados?operacion=listaAlumnosGrupo" paramId="codigoLab" paramName="grupo" paramProperty="codigoLab"><bean:write name="grupo" property="codigoLab"></bean:write></html:link></td>
-                            <td><html:link action="/opListados?operacion=listaAlumnosGrupo" paramId="codigoLab" paramName="grupo" paramProperty="codigoLab"><bean:write name="grupo" property="dia"></bean:write></html:link></td>
-                            <td><html:link action="/opListados?operacion=listaAlumnosGrupo" paramId="codigoLab" paramName="grupo" paramProperty="codigoLab"><bean:write name="grupo" property="hora"></bean:write></html:link></td>
-                            <td><html:link action="/opListados?operacion=listaAlumnosGrupo" paramId="codigoLab" paramName="grupo" paramProperty="codigoLab"><bean:write name="grupo" property="observaciones"></bean:write></html:link></td>
+                            <td><html:link action="/profesor/opListados?operacion=listaAlumnosGrupo" paramId="codigoLab" paramName="grupo" paramProperty="codigoLab"><bean:write name="grupo" property="codigoLab"></bean:write></html:link></td>
+                            <td><html:link action="/profesor/opListados?operacion=listaAlumnosGrupo" paramId="codigoLab" paramName="grupo" paramProperty="codigoLab"><bean:write name="grupo" property="dia"></bean:write></html:link></td>
+                            <td><html:link action="/profesor/opListados?operacion=listaAlumnosGrupo" paramId="codigoLab" paramName="grupo" paramProperty="codigoLab"><bean:write name="grupo" property="hora"></bean:write></html:link></td>
+                            <td><html:link action="/profesor/opListados?operacion=listaAlumnosGrupo" paramId="codigoLab" paramName="grupo" paramProperty="codigoLab"><bean:write name="grupo" property="observaciones"></bean:write></html:link></td>
                             
                         </tr>
                     </logic:iterate>

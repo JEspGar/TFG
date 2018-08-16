@@ -51,7 +51,7 @@
 					<tr>
 						<td>
 							<h3>
-								<html:link action="/opListados?operacion=verAsignaturas"
+								<html:link action="/profesor/opListados?operacion=verAsignaturas"
 									paramId="titulacion" paramName="titulacion"
 									paramProperty="titulacion">
 									<bean:write name="titulacion" property="titulacion"></bean:write>

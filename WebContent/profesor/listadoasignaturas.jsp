@@ -15,7 +15,7 @@
 <html:html>
     <head>
         <title>Listado de Alumnos por Asignatura / Grupo</title>
-        <link rel="stylesheet" type="text/css" href="inc/estilos.css">
+        <link rel="stylesheet" type="text/css" href="../inc/estilos.css">
     </head>
 
     <body>
@@ -58,13 +58,13 @@
                     <logic:iterate id="asignatura" name="vectorAsignaturas" scope="request" type="web.data.asignatura">
                         <tr>
                             <td>
-                                <h4><html:link action="/opListados?operacion=verGrupos" paramId="asignatura" paramName="asignatura" paramProperty="codigo" >
+                                <h4><html:link action="/profesor/opListados?operacion=verGrupos" paramId="asignatura" paramName="asignatura" paramProperty="codigo" >
                                         <bean:write name="asignatura" property="titulo"></bean:write>
                                     </html:link>
                                 </h4>
                             </td>
                             <td align="center"><h4><bean:write name="asignatura" property="responsable"></bean:write></h4></td>
-                            <td align="center"><img src="images/null.GIF" width="60" height="55" alt="imagen-profesor"  class="float-left" /></td>
+                            <td align="center"><img src="../images/null.GIF" width="60" height="55" alt="imagen-profesor"  class="float-left" /></td>
 
                         </tr>
 

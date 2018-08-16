@@ -16,7 +16,7 @@
 <html:html>
     <head>
         <title>Listado de Alumnos por Asignatura / Grupo</title>
-        <link rel="stylesheet" type="text/css" href="inc/estilos.css">
+        <link rel="stylesheet" type="text/css" href="../inc/estilos.css">
     </head>
 
     <body>
