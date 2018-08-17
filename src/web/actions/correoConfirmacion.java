@@ -31,8 +31,8 @@ public class correoConfirmacion extends Action
                           (String)sesion.getAttribute("carrera")+" los "+(String)sesion.getAttribute("dia")+
                           " a las "+(String)sesion.getAttribute("hora");
 
-         final String username = "javier.eg.86@gmail.com";
- 		final String password = "aht$2630";
+         final String username = "";
+ 		final String password = "";
 
  		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
