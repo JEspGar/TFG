@@ -24,6 +24,7 @@ public class asignaturasForm extends ActionForm
 	    private String titulacion;
 	    private ArrayList titulacionesList;
 	    private ArrayList asignaturasList;
+	    private ArrayList profesoresList;
 	    private String method;
 
 	    public String getCodigo() {
@@ -114,6 +115,14 @@ public class asignaturasForm extends ActionForm
 			this.asignaturasList = asignaturasList;
 		}
 
+		public ArrayList getProfesoresList() {
+			return profesoresList;
+		}
+
+		public void setProfesoresList(ArrayList profesoresList) {
+			this.profesoresList = profesoresList;
+		}
+
 		//Valida los errores del formulario
 	    @Override
 	    public ActionErrors validate (ActionMapping mapping, HttpServletRequest req)
@@ -175,16 +184,16 @@ public class asignaturasForm extends ActionForm
 	        }
 	        
 	        //Errores del campo email
-	        if(email.length() > 50)
-	        {
-	            errores.add("asignatura.email.extenso", new ActionMessage("error.email.long"));
-	        }
+//	        if(email.length() > 50)
+//	        {
+//	            errores.add("asignatura.email.extenso", new ActionMessage("error.email.long"));
+//	        }
 	        
 	        //Errores del campo telefono
-	        if(telefono.length() > 10)
-	        {
-	            errores.add("asignatura.telefono.extenso", new ActionMessage("error.telefono.long"));
-	        }
+//	        if(telefono.length() > 10)
+//	        {
+//	            errores.add("asignatura.telefono.extenso", new ActionMessage("error.telefono.long"));
+//	        }
 
 	        return errores;
 	    }

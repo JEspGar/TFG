@@ -34,7 +34,7 @@
         <html:errors property="asignatura.fechaFin.vacio"></html:errors>
         <html:errors property="asignatura.fechaFin.formato"></html:errors>
         
-      <label>Responsable</label>
+      <%-- <label>Responsable</label>
       <html:text property="responsable" size="29" ></html:text>
         <html:errors property="asignatura.responsable.extenso"></html:errors>
 
@@ -44,7 +44,14 @@
 
       <label>Tel&eacute;fono</label>
       <html:text property="telefono" size="29" ></html:text>
-        <html:errors property="asignatura.telefono.extenso"></html:errors>
+        <html:errors property="asignatura.telefono.extenso"></html:errors> --%>
+        
+      <label>Responsable</label>   
+       <html:select property="responsable" value="Select">
+		<html:optionsCollection name="asignaturasForm" property="profesoresList"
+		label="label" value="value" />
+		</html:select>
+        <html:errors property="asignatura.responsable.extenso"></html:errors>
         
       <label>Titulacion</label>   
        <html:select property="titulacion" value="Select">

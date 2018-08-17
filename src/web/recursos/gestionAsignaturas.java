@@ -16,6 +16,7 @@ import web.data.titulacion;
 import web.forms.asignaturasForm;
 import web.forms.registroForm;
 import web.data.grupo;
+import web.data.profesor;
 
 
 public class gestionAsignaturas
@@ -171,6 +172,93 @@ public class gestionAsignaturas
         catch(SQLException e)
         {
             System.out.println("Error al acceder a los grupos de la Base de Datos: "+e.getMessage());
+            return null;
+        }
+    }
+    
+  //Devuelve un vector con todos los profesores 
+    public Vector listaProfesores()
+    {
+        try
+        {
+
+            //Se obtiene una conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Se prepara la query
+            String query  =  "SELECT * FROM profesores";
+
+            //Se crea un vector de asignaturas
+            Vector  vectorProfesores = new Vector();
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            //Para cada fila se creará un objeto y se rellenará
+            //con los valores de las columnas.
+            while(resultado.next())
+            {
+                profesor profesor = new profesor();
+
+                profesor.setIdProfesor(Integer.valueOf(resultado.getString("idprofesor")));
+                profesor.setNombre(resultado.getString("nombre"));
+                profesor.setEmail(resultado.getString("email"));
+                profesor.setTelefono(Integer.valueOf(resultado.getString("telefono")));
+
+                //Se añade la asignatura al vector de asignaturas
+                vectorProfesores.add(profesor);
+            }
+
+            //Se cierra la conexión
+            this.bbdd.cerrarConexion(conexion);
+
+            return vectorProfesores;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al acceder a los profesores de la Base de Datos: "+e.getMessage());
+            return null;
+        }
+    }
+    
+    public profesor datosProfesor(String codigoProf)
+    {
+        try
+        {
+            //Se obtiene una conexion
+            Connection conexion = this.bbdd.getConexion();
+
+            //Se prepara la query
+            String query  = "SELECT * FROM profesores ";
+                   query += "WHERE idprofesor='"+codigoProf+"'";
+
+            //Se crea una instancia de asignatura
+            profesor profesor = new profesor();
+
+            //Se ejecuta la query
+            Statement st = conexion.createStatement();
+            ResultSet resultado = st.executeQuery(query);
+
+            //Para cada fila se creará un objeto y se rellenará
+            //con los valores de las columnas.
+            if(resultado.next())
+            {
+            	profesor.setIdProfesor(Integer.valueOf(resultado.getString("idprofesor")));
+            	profesor.setNombre(resultado.getString("nombre"));
+            	profesor.setEmail(resultado.getString("email"));
+            	profesor.setTelefono(Integer.valueOf(resultado.getString("telefono")));
+               
+            }
+
+            //Se cierra la conexión
+            this.bbdd.cerrarConexion(conexion);
+
+            return profesor;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error al acceder a la titulacion en la Base de Datos: "+e.getMessage());
             return null;
         }
     }

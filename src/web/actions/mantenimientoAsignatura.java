@@ -47,13 +47,23 @@ public class mantenimientoAsignatura extends DispatchAction
     	   listaTitulaciones.add(new LabelValueBean((String)titulacion.getTitulacion(), (String)titulacion.getCodigo()));
        }
        
+       Vector profesores = gAsignaturas.listaProfesores();
+       contador=profesores.elements();
+       ArrayList listaProfesores = new ArrayList();
+       while (contador.hasMoreElements()) {
+    	   profesor profesor = (profesor)contador.nextElement();
+    	   listaProfesores.add(new LabelValueBean((String)profesor.getNombre(), String.valueOf(profesor.getIdProfesor())));
+       }
+       
        formulario.setTitulacionesList(listaTitulaciones);
+       formulario.setProfesoresList(listaProfesores);
        
      //Si hay titulaciones
-       if (titulaciones != null && titulaciones.size() > 0)
+       if (titulaciones != null && titulaciones.size() > 0 && profesores != null && profesores.size() > 0)
        {
            //Se envia en la peticion el vector de titulaciones
            request.setAttribute("titulacionesList", listaTitulaciones);
+           request.setAttribute("profesoresList", listaProfesores);
 
            return mapping.findForward("asignatura_form");
 
@@ -95,7 +105,16 @@ public class mantenimientoAsignatura extends DispatchAction
         	   listaTitulaciones.add(new LabelValueBean((String)titulacion.getTitulacion(), (String)titulacion.getCodigo()));
            }
            
+           Vector profesores = gAsignaturas.listaProfesores();
+           contador=profesores.elements();
+           ArrayList listaProfesores = new ArrayList();
+           while (contador.hasMoreElements()) {
+        	   profesor profesor = (profesor)contador.nextElement();
+        	   listaProfesores.add(new LabelValueBean((String)profesor.getNombre(), String.valueOf(profesor.getIdProfesor())));
+           }
+           
            formulario.setTitulacionesList(listaTitulaciones);
+           formulario.setProfesoresList(listaProfesores);
            
            //Se envia en la peticion el vector de titulaciones
            request.setAttribute("titulacionesList", listaTitulaciones);
@@ -108,6 +127,10 @@ public class mantenimientoAsignatura extends DispatchAction
        }else {
     	   asignatura existe= gAsignaturas.comprobarAsignatura(formulario.getCodigo(), formulario.getTitulo(), formulario.getTitulacion());
     	   if (existe.getCodigo()==null) {
+    		   profesor profesor = gAsignaturas.datosProfesor(formulario.getResponsable());
+    		   formulario.setResponsable(profesor.getNombre());
+    		   formulario.setEmail(profesor.getEmail());
+    		   formulario.setTelefono(String.valueOf(profesor.getTelefono()));
     		   insertada = gAsignaturas.registrarAsignatura(formulario);
     	   }else {
     		   insertada = false;
@@ -220,14 +243,31 @@ public class mantenimientoAsignatura extends DispatchAction
 		{
 			//Se envia en la peticion el vector de titulaciones
 			formulario.setCodigo(asignatura.getCodigo());
-			formulario.setEmail(asignatura.getEmail());
+//			formulario.setEmail(asignatura.getEmail());
 			SimpleDateFormat formato1 = new SimpleDateFormat("dd/MM/yyyy");
 			formulario.setFechaFin(formato1.format(asignatura.getFechaFin()));
 			formulario.setFechaInicio(formato1.format(asignatura.getFechaInicio()));
 			formulario.setResponsable(asignatura.getResponsable());
-			formulario.setTelefono(asignatura.getTelefono());
+//			formulario.setTelefono(asignatura.getTelefono());
 			formulario.setTitulo(asignatura.getTitulo());
 			formulario.setTitulacion(asignatura.getTitulacion());
+			
+			Vector profesores = gAsignaturas.listaProfesores();
+	        Enumeration contador=profesores.elements();
+	        ArrayList listaProfesores = new ArrayList();
+	        ArrayList listaProfesoresAux = new ArrayList();
+	        while (contador.hasMoreElements()) {
+	     	   profesor profesor = (profesor)contador.nextElement();
+	     	   if (profesor.getNombre().toLowerCase().equals(asignatura.getResponsable().toLowerCase())) {
+	     		   listaProfesores.add(new LabelValueBean((String)profesor.getNombre(), String.valueOf(profesor.getIdProfesor())));
+	     	   }else {
+	     		   listaProfesoresAux.add(new LabelValueBean((String)profesor.getNombre(), String.valueOf(profesor.getIdProfesor())));
+	     	   }
+	        }
+	        listaProfesores.addAll(listaProfesoresAux);
+	        
+	        formulario.setProfesoresList(listaProfesores);
+	        
 			request.setAttribute("asignaturasForm", formulario);
 			return mapping.findForward("mantenimiento_form");
 		
@@ -260,6 +300,10 @@ public class mantenimientoAsignatura extends DispatchAction
 		boolean modificada=false;
 		
 		if (errores.isEmpty()) {
+		   profesor profesor = gAsignaturas.datosProfesor(formulario.getResponsable());
+  		   formulario.setResponsable(profesor.getNombre());
+  		   formulario.setEmail(profesor.getEmail());
+  		   formulario.setTelefono(String.valueOf(profesor.getTelefono()));
   		   modificada = gAsignaturas.modificarAsignatura(formulario);
   		   if (modificada){
   			   pantalla="asignatura_modificada";
