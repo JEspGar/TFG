@@ -80,8 +80,8 @@ public class registroAlumno extends DispatchAction {
 			String mensaje = "Si deseas modificar tu inscripcion en el grupo de laboratorio por favor abre el siguiente enlace: "
 					+ request.getRequestURL() + inscripcion;
 
-			final String username = "javier.eg.86@gmail.com";
-			final String pass = "aht$2630";
+			final String username = "";
+			final String pass = "";
 
 			Properties props = new Properties();
 			props.put("mail.smtp.host", "smtp.gmail.com");
