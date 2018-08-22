@@ -10,7 +10,8 @@
 
 
 <h3 style="float: left;">
-	<html:link forward="menu_administracion">Menu Administracion</html:link>
+	<%-- <html:link forward="menu_administracion">Menu Administracion</html:link> --%>
+	<html:link forward="menu_administracion"><img alt="administracion" src="images/administracion.jpg" width="25" height="25"></html:link>
 </h3>
 <br />
 <br />
